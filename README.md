@@ -1,2 +1,2 @@
 # waiter
-Robot waiter application
+Robot waiter application.
