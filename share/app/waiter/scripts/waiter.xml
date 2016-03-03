@@ -1,0 +1,49 @@
+<application>
+<name>waiter App</name>
+    <module>
+        <name>dialogueManager1</name>
+        <node>localhost</node>
+    </module>
+
+    <module>
+        <name>executionCore2</name>
+        <node>/manipulation</node>
+    </module>
+    <connection>
+        <from>/dialogueManager1/command:o</from>
+        <to>/executionCore1/dialogueManager/command:i</to>
+    </connection>
+
+    <module>
+        <name>cvBottle</name>
+        <parameters>--kinectDevice OpenNI2DeviceClient --kinectLocal /cvBottle</parameters>
+        <node>/head</node>
+    </module>
+
+    <connection>
+        <from>/cvBottle/state:o</from>
+        <to>/executionCore1/cv/state:i</to>
+    </connection>
+
+    <module>
+        <name>yarpview</name>
+        <parameters>--name /yarpview/cvBottle/img:i</parameters>
+        <node>localhost</node>
+    </module>
+    <connection>
+        <from>/cvBottle/img:o</from>
+        <to>/yarpview/cvBottle/img:i</to>
+    </connection>
+
+    <connection>
+        <from>/speechRecognition1:o</from>
+        <to>/dialogueManager1/speechRecognition:i</to>
+    </connection>
+
+    <connection>
+        <from>/dialogueManager1/iSpeak:o</from>
+        <to>/iSpeak</to>
+    </connection>
+
+</application>
+
