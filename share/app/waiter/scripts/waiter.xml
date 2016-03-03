@@ -1,9 +1,9 @@
 <application>
 <name>waiter App</name>
-    <module>
+    <!-- <module>
         <name>dialogueManager1</name>
         <node>localhost</node>
-    </module>
+    </module> -->
 
     <module>
         <name>executionCore2</name>
@@ -35,15 +35,15 @@
         <to>/yarpview/cvBottle/img:i</to>
     </connection>
 
-    <connection>
+    <!-- <connection>
         <from>/speechRecognition1:o</from>
         <to>/dialogueManager1/speechRecognition:i</to>
-    </connection>
+    </connection> -->
 
-    <connection>
+    <!-- <connection>
         <from>/dialogueManager1/iSpeak:o</from>
         <to>/iSpeak</to>
-    </connection>
+    </connection>  -->
 
 </application>
 
