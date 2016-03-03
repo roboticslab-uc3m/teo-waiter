@@ -11,18 +11,18 @@
     </module>
     <connection>
         <from>/dialogueManager1/command:o</from>
-        <to>/executionCore1/dialogueManager/command:i</to>
+        <to>/executionCore2/dialogueManager/command:i</to>
     </connection>
 
     <module>
-        <name>cvBottle</name>
-        <parameters>--kinectDevice OpenNI2DeviceClient --kinectLocal /cvBottle</parameters>
+        <name>cv1</name>
+        <parameters>--kinectLocal /cvBottle --maxNumBlobs 1 --algorithm redMinusBlue --threshold 55 --outFeatures "(pxX pxY)" --outFeaturesFormat 1</parameters>
         <node>/head</node>
     </module>
 
     <connection>
         <from>/cvBottle/state:o</from>
-        <to>/executionCore1/cv/state:i</to>
+        <to>/executionCore2/cv/state:i</to>
     </connection>
 
     <module>
