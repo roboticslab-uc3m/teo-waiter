@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
     rf.setDefaultConfigFile("waiterDialogueManager.ini");
     rf.configure(argc, argv);
 
-    teo::FollowMeDialogueManager mod;
+    teo::WaiterDialogueManager mod;
     if(rf.check("help")) {
         return mod.runModule(rf);
     }

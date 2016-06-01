@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
     rf.setDefaultConfigFile("waiterExecutionCore.ini");
     rf.configure(argc, argv);
 
-    teo::ExecutionCore3 mod;
+    teo::WaiterExecutionCore mod;
     if(rf.check("help")) {
         return mod.runModule(rf);
     }

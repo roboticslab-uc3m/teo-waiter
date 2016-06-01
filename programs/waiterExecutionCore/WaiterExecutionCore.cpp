@@ -71,11 +71,11 @@ bool WaiterExecutionCore::updateModule() {
 bool WaiterExecutionCore::interruptModule() {
     printf("WaiterExecutionCore closing...\n");
     inCvPort.disableCallback();
-//    inSrPort.disableCallback();
+    inSrPort.disableCallback();
     inCvPort.interrupt();
-//    inSrPort.interrupt();
+    inSrPort.interrupt();
     inCvPort.close();
-//    inSrPort.close();
+    inSrPort.close();
     return true;
 }
 

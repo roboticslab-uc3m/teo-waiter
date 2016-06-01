@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 #include "InCvPort.hpp"
-//#include "InSrPort.hpp"
+#include "InSrPort.hpp"
 
 #define VOCAB_FOLLOW_ME VOCAB4('f','o','l','l')
 #define VOCAB_STOP_FOLLOWING VOCAB4('s','f','o','l')
@@ -30,7 +30,7 @@ class WaiterExecutionCore : public RFModule {
         bool configure(ResourceFinder &rf);
 
     protected:
-     //   InSrPort inSrPort;
+        InSrPort inSrPort;
         InCvPort inCvPort;
         yarp::dev::PolyDriver headDevice;
         yarp::dev::IPositionControl *iPositionControl;
