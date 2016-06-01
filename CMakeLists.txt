@@ -1,5 +1,5 @@
 # Copyright: Universidad Carlos III de Madrid (C) 2016;
-# Authors: Juan Miguel Garcia
+# Authors: Juan G Victores
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 # Exploit new cmake 2.6 features (export). 
@@ -14,13 +14,15 @@ endif(COMMAND cmake_policy)
 project(WAITER)
 
 ### options: cpp libraries
-option(ENABLE_ExampleLibrary "Choose if you want to compile ExampleLibrary" TRUE)
+#option(ENABLE_ExampleLibrary "Choose if you want to compile ExampleLibrary" TRUE)
 
 ### options: cpp programs
-option(ENABLE_exampleProgram "Choose if you want to compile exampleProgram" TRUE)
+option(ENABLE_waiterArmMov "Choose if you want to compile waiterArmMov" TRUE)
+option(ENABLE_waiterDialogueManager "Choose if you want to compile waiterDialogueManager" TRUE)
+option(ENABLE_waiterExecutionCore "Choose if you want to compile waiterExecutionCore" TRUE)
 
 ### options: force default
-option(ENABLE_exampleExtraOption "Enable/disable option exampleExtraOption" TRUE)
+#option(ENABLE_exampleExtraOption "Enable/disable option exampleExtraOption" TRUE)
 
 if(MSVC)
   MESSAGE(STATUS "Running on windows")    
@@ -38,7 +40,7 @@ endif(MSVC)
 
 ######################
 
-### this makes everything go in $WAITER_DIR/lib and $WAITER_DIR/bin
+### this makes everything go in $FOLLOW_ME_DIR/lib and $FOLLOW_ME_DIR/bin
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 message(STATUS "Libraries go to ${LIBRARY_OUTPUT_PATH}")
@@ -67,7 +69,7 @@ add_subdirectory(share)
 add_subdirectory(libraries)
 add_subdirectory(programs)
 
-# export our variables to a WAITERConfig.cmake creation
+# export our variables to a FOLLOW_MEConfig.cmake creation
 set(WAITER_LINK_DIRS ${WAITER_LINK_DIRS} ${LIBRARY_OUTPUT_PATH})
 configure_file(${CMAKE_SOURCE_DIR}/cmake/template/WAITERConfig.cmake.in
                ${CMAKE_BINARY_DIR}/WAITERConfig.cmake @ONLY)
