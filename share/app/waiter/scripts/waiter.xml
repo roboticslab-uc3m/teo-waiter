@@ -45,5 +45,10 @@
         <to>/icub/speech:rpc</to>
     </connection>
 
+    <module>
+        <name>waiterArmMov</name>
+        <node>localhost</node>
+    </module>
+
 </application>
 
