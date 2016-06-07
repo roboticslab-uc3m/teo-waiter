@@ -1,28 +1,28 @@
 <application>
 <name>waiter App</name>
-    <!-- <module>
-        <name>dialogueManager1</name>
+    <module>
+        <name>waiterDialogueManager</name>
         <node>localhost</node>
-    </module> -->
+    </module>
 
     <module>
-        <name>executionCore2</name>
-        <node>/manipulation</node>
+        <name>waiterExecutionCore</name>
+        <node>localhost</node>
     </module>
     <connection>
-        <from>/dialogueManager1/command:o</from>
-        <to>/executionCore2/dialogueManager/command:i</to>
+        <from>/waiterDialogueManager/command:o</from>
+        <to>/waiterExecutionCore/waiterDialogueManager/command:i</to>
     </connection>
 
     <module>
-        <name>cv1</name>
-        <parameters>--kinectLocal /cvBottle --maxNumBlobs 1 --algorithm redMinusBlue --threshold 55 --outFeatures "(pxX pxY)" --outFeaturesFormat 1</parameters>
+        <name>cvBottle</name>
+        <parameters>--kinectDevice OpenNI2DeviceClient --kinectLocal /cvBottle --maxNumBlobs 1 --algorithm redMinusGreen --threshold 55 --outFeatures "(pxXpos pxYpos mmZ)" --outFeaturesFormat 1 --outImage 0 --seeBouding 1</parameters>
         <node>/head</node>
     </module>
 
     <connection>
         <from>/cvBottle/state:o</from>
-        <to>/executionCore2/cv/state:i</to>
+        <to>/waiterExecutionCore/cv/state:i</to>
     </connection>
 
     <module>
@@ -35,15 +35,15 @@
         <to>/yarpview/cvBottle/img:i</to>
     </connection>
 
-    <!-- <connection>
-        <from>/speechRecognition1:o</from>
-        <to>/dialogueManager1/speechRecognition:i</to>
-    </connection> -->
+    <connection>
+        <from>/speechRecognition:o</from>
+        <to>/waiterDialogueManager/speechRecognition:i</to>
+    </connection>
 
-    <!-- <connection>
-        <from>/dialogueManager1/iSpeak:o</from>
-        <to>/iSpeak</to>
-    </connection>  -->
+    <connection>
+        <from>/waiterDialogueManager/iSpeak:o</from>
+        <to>/icub/speech:rpc</to>
+    </connection>
 
 </application>
 

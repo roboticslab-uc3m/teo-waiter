@@ -49,7 +49,7 @@ bool WaiterExecutionCore::configure(ResourceFinder &rf) {
     inSrPort.setInCvPortPtr(&inCvPort);
     inCvPort.useCallback();
     inSrPort.useCallback();
-    inSrPort.open("/waiterExecutionCore/dialogueManager/command:i");
+    inSrPort.open("/waiterExecutionCore/waiterDialogueManager/command:i");
     inCvPort.open("/waiterExecutionCore/cv/state:i");
 
     return true;
