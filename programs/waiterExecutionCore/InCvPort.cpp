@@ -8,7 +8,7 @@ namespace teo
 /************************************************************************/
 
 void InCvPort::onRead(Bottle& b) {
-    if ( ! follow ) return;
+    //if ( ! follow ) return;
     if (b.size() < 3) return;
 
     double x = b.get(0).asDouble();
