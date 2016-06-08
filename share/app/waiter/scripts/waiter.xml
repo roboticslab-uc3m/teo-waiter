@@ -7,7 +7,7 @@
 
     <module>
         <name>waiterExecutionCore</name>
-        <node>localhost</node>
+        <node>/manipulation</node>
     </module>
     <connection>
         <from>/waiterDialogueManager/command:o</from>
@@ -16,7 +16,7 @@
 
     <module>
         <name>cvBottle</name>
-        <parameters>--kinectDevice OpenNI2DeviceClient --kinectLocal /cvBottle --maxNumBlobs 1 --algorithm redMinusGreen --threshold 55 --outFeatures "(pxXpos pxYpos mmZ)" --outFeaturesFormat 1 --outImage 0 --seeBouding 1</parameters>
+        <parameters>--algorithm redMinusGreen --maxNumBlobs 1 --outFeatures "(pxXpos pxYpos mmZ)" --outFeaturesFormat 1 --outImage 0 --seeBounding 1</parameters>
         <node>/head</node>
     </module>
 
