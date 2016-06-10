@@ -20,6 +20,7 @@ project(WAITER)
 option(ENABLE_waiterArmMov "Choose if you want to compile waiterArmMov" TRUE)
 option(ENABLE_waiterDialogueManager "Choose if you want to compile waiterDialogueManager" TRUE)
 option(ENABLE_waiterExecutionCore "Choose if you want to compile waiterExecutionCore" TRUE)
+option(ENABLE_waiterExecManip "Choose if you want to compile waiterExecManip" TRUE)
 
 ### options: force default
 #option(ENABLE_exampleExtraOption "Enable/disable option exampleExtraOption" TRUE)
