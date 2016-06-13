@@ -8,7 +8,7 @@ namespace teo
 /************************************************************************/
 
 void InCvPort::onRead(Bottle& b) {
-/*
+
     if ( ! follow ) {
         iPositionControl->positionMove(0, 0);
         iPositionControl->positionMove(0, 0);
@@ -18,7 +18,7 @@ void InCvPort::onRead(Bottle& b) {
         iPositionControl->positionMove(0, 0);
         iPositionControl->positionMove(0, 0);
         return;
-    }*/
+    }
 
     /*
     if (b.size() < 3) return;
