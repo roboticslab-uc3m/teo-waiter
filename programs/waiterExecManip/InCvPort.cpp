@@ -11,12 +11,12 @@ void InCvPort::onRead(Bottle& b) {
 
     if ( ! follow ) {
         iPositionControl->positionMove(0, 0);
-        iPositionControl->positionMove(0, 0);
-        iPositionControl->positionMove(0, 0);
-        iPositionControl->positionMove(0, 0);
-        iPositionControl->positionMove(0, 0);
-        iPositionControl->positionMove(0, 0);
-        iPositionControl->positionMove(0, 0);
+        iPositionControl->positionMove(1, 0);
+        iPositionControl->positionMove(2, 0);
+        iPositionControl->positionMove(3, 0);
+        iPositionControl->positionMove(4, 0);
+        iPositionControl->positionMove(5, 0);
+        iPositionControl->positionMove(6, 0);
         return;
     }
 
