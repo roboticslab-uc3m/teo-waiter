@@ -30,8 +30,8 @@ bool WaiterDialogueManager::configure(yarp::os::ResourceFinder &rf) {
     outCmdPortManip.open("/waiterDialMan/Head/command:o");
     outTtsPort.open("/waiterDialMan/iSpeak:o");
     inSrPort.open("/waiterDialMan/speechRecognition:i");
-    stateMachine.setOutCmdPort(&outCmdPortHead);
-    stateMachine.setOutCmdPort(&outCmdPortManip);
+    stateMachine.setOutCmdPortHead(&outCmdPortHead);
+    stateMachine.setOutCmdPortManip(&outCmdPortManip);
     stateMachine.setOutTtsPort(&outTtsPort);
     stateMachine.setInSrPort(&inSrPort);
     while(1){

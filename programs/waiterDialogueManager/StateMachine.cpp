@@ -83,8 +83,13 @@ void StateMachine::setInSrPort(yarp::os::BufferedPort<yarp::os::Bottle>* inSrPor
 
 /************************************************************************/
 
-void StateMachine::setOutCmdPort(yarp::os::Port* outCmdPort) {
+void StateMachine::setOutCmdPortHead(yarp::os::Port* outCmdPort) {
     this->outCmdPortHead = outCmdPort;
+}
+
+/************************************************************************/
+
+void StateMachine::setOutCmdPortManip(yarp::os::Port* outCmdPort) {
     this->outCmdPortManip = outCmdPort;
 }
 

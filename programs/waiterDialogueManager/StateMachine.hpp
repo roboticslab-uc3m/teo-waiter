@@ -68,7 +68,10 @@ public:
     void setInSrPort(yarp::os::BufferedPort<yarp::os::Bottle>* inSrPort);
 
     /** Register an output Port for commands. */
-    void setOutCmdPort(yarp::os::Port* outCmdPort);
+    void setOutCmdPortHead(yarp::os::Port* outCmdPort);
+
+    /** Register an output Port for commands. */
+    void setOutCmdPortManip(yarp::os::Port* outCmdPort);
 
     /** Register an output Port for tts. */
     void setOutTtsPort(yarp::os::Port* outTtsPort);
