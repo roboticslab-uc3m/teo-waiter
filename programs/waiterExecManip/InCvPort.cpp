@@ -28,7 +28,7 @@ void InCvPort::onRead(Bottle& b) {
     double z = b.get(2).asDouble();
 */
     int a=0;
-    if (a==0) {
+    if (a==0 && follow) {
         printf("MOVE TO POSITION 01\n");
         iPositionControl->positionMove(0, -30);
         iPositionControl->positionMove(1, 40);
@@ -42,7 +42,7 @@ void InCvPort::onRead(Bottle& b) {
         a=1;
     }
 
-    if (a==1) {
+    if (a==1 && follow) {
         printf("MOVE TO POSITION 02\n");
         iPositionControl->positionMove(0, -10);
         iPositionControl->positionMove(1, 30);
@@ -56,7 +56,7 @@ void InCvPort::onRead(Bottle& b) {
         a=2;
     }
 
-    if (a==2) {
+    if (a==2 && follow) {
         printf("MOVE TO POSITION 03\n");
         iPositionControl->positionMove(0, -30);
         iPositionControl->positionMove(1, -10);
