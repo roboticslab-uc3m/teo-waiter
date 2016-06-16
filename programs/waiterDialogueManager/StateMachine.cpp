@@ -33,13 +33,15 @@ void StateMachine::run() {
             ttsSay( yarp::os::ConstString("Okay, I will follow you.") );
             yarp::os::Bottle cmd;
             cmd.addVocab(VOCAB_FOLLOW_ME);
-            outCmdPort->write(cmd);
+            outCmdPortHead->write(cmd);
+            outCmdPortManip->write(cmd);
             _machineState=0;
         } else if (_machineState==3) {
             ttsSay( yarp::os::ConstString("Okay, I will stop following you") );
             yarp::os::Bottle cmd;
             cmd.addVocab(VOCAB_STOP_FOLLOWING);
-            outCmdPort->write(cmd);
+            outCmdPortHead->write(cmd);
+            outCmdPortManip->write(cmd);
             _machineState=0;
         } else {
             ttsSay( yarp::os::ConstString("ANOMALY") );
@@ -82,7 +84,8 @@ void StateMachine::setInSrPort(yarp::os::BufferedPort<yarp::os::Bottle>* inSrPor
 /************************************************************************/
 
 void StateMachine::setOutCmdPort(yarp::os::Port* outCmdPort) {
-    this->outCmdPort = outCmdPort;
+    this->outCmdPortHead = outCmdPort;
+    this->outCmdPortManip = outCmdPort;
 }
 
 /************************************************************************/

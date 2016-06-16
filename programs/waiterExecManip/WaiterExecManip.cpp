@@ -45,7 +45,7 @@ bool WaiterExecManip::configure(ResourceFinder &rf) {
     inSrPort.setInCvPortPtr(&inCvPort);
     inCvPort.useCallback();
     inSrPort.useCallback();
-    inSrPort.open("/waiterExecManip/waiterDialogueManager/command:i");
+    inSrPort.open("/waiterExecManip/DialogueManager/command:i");
     inCvPort.open("/waiterExecManip/cvBottle/state:i");
 
     return true;

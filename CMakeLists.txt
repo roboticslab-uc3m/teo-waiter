@@ -1,5 +1,6 @@
 # Copyright: Universidad Carlos III de Madrid (C) 2016;
-# Authors: Juan G Victores
+# Authors: Juan Hernandez y Juan Miguel Garcia
+
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 # Exploit new cmake 2.6 features (export). 
@@ -19,7 +20,7 @@ project(WAITER)
 ### options: cpp programs
 option(ENABLE_waiterArmMov "Choose if you want to compile waiterArmMov" TRUE)
 option(ENABLE_waiterDialogueManager "Choose if you want to compile waiterDialogueManager" TRUE)
-option(ENABLE_waiterExecutionCore "Choose if you want to compile waiterExecutionCore" TRUE)
+option(ENABLE_waiterExecHead "Choose if you want to compile waiterExecHead" TRUE)
 option(ENABLE_waiterExecManip "Choose if you want to compile waiterExecManip" TRUE)
 
 ### options: force default

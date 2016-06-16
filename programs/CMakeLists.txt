@@ -3,7 +3,7 @@
 
 add_subdirectory(waiterArmMov)
 add_subdirectory(waiterDialogueManager)
-add_subdirectory(waiterExecutionCore)
+add_subdirectory(waiterExecHead)
 add_subdirectory(waiterExecManip)
 
 

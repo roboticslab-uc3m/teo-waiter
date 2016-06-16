@@ -27,7 +27,8 @@ class WaiterDialogueManager : public yarp::os::RFModule {
     StateMachine stateMachine;
     yarp::os::BufferedPort<yarp::os::Bottle> inSrPort;
     yarp::os::Port outTtsPort;
-    yarp::os::Port outCmdPort;
+    yarp::os::Port outCmdPortManip;
+    yarp::os::Port outCmdPortHead;
 
     bool interruptModule();
     double getPeriod();

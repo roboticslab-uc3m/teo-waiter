@@ -28,7 +28,8 @@ class StateMachine : public yarp::os::Thread {
 protected:
 
     yarp::os::BufferedPort<yarp::os::Bottle> *inSrPort;
-    yarp::os::Port *outCmdPort;
+    yarp::os::Port *outCmdPortHead;
+    yarp::os::Port *outCmdPortManip;
     yarp::os::Port *outTtsPort;
 
     int _machineState;
