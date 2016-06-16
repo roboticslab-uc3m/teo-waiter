@@ -9,11 +9,11 @@ namespace teo
 
 void InSrPort::onRead(Bottle& b) {
     switch ( b.get(0).asVocab() ) {
-        case VOCAB_FOLLOW_ME:
+        case VOCAB_HELLO_TEO:
             printf("follow\n");
             inCvPortPtr->setFollow(true);
             break;
-        case VOCAB_STOP_FOLLOWING:
+        case VOCAB_STOP_TEO:
             printf("stopFollowing\n");
             inCvPortPtr->setFollow(false);
             break;

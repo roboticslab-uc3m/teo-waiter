@@ -16,6 +16,56 @@ bool StateMachine::threadInit() {
 
 void StateMachine::run() {
     while(!isStopping()) {
+            if(_machineState==-1) {
+                ttsSay( yarp::os::ConstString("Sorry, I do not understand.") );
+                _machineState=0;
+            } else if(_machineState==0) {
+                ttsSay( yarp::os::ConstString("Please tell me.") );
+                _machineState=1;
+            } else if(_machineState==1) {
+                yarp::os::ConstString inStr = asrListen();
+                // Blocking
+                _inStrState1 = inStr;
+                if( _inStrState1.find("hello teo") != yarp::os::ConstString::npos ) _machineState=2;
+                else if ( _inStrState1.find("go teo") != yarp::os::ConstString::npos ) _machineState=3;
+                else if ( _inStrState1.find("water please") != yarp::os::ConstString::npos ) _machineState=4;
+                else if ( _inStrState1.find("stop teo") != yarp::os::ConstString::npos ) _machineState=5;
+                else _machineState=-1;
+            } else if (_machineState==2) {
+                ttsSay( yarp::os::ConstString("Hi, I am teo, your waiter.") );
+                yarp::os::Bottle cmd;
+                cmd.addVocab(VOCAB_HELLO_TEO);
+                outCmdPortHead->write(cmd);
+                outCmdPortManip->write(cmd);
+                _machineState=0;
+            } else if (_machineState==3) {
+                ttsSay( yarp::os::ConstString("Are you thirsty.") );
+                yarp::os::Bottle cmd;
+                cmd.addVocab(VOCAB_GO_TEO);
+                outCmdPortHead->write(cmd);
+                outCmdPortManip->write(cmd);
+                _machineState=0;
+            } else if (_machineState==4) {
+                ttsSay( yarp::os::ConstString("Here you are.") );
+                yarp::os::Bottle cmd;
+                cmd.addVocab(VOCAB_WATER_PLEASE);
+                outCmdPortHead->write(cmd);
+                outCmdPortManip->write(cmd);
+                _machineState=0;
+            } else if (_machineState==5) {
+                ttsSay( yarp::os::ConstString("Okay, see you later.") );
+                yarp::os::Bottle cmd;
+                cmd.addVocab(VOCAB_STOP_TEO);
+                outCmdPortHead->write(cmd);
+                outCmdPortManip->write(cmd);
+                _machineState=0;
+            } else {
+                ttsSay( yarp::os::ConstString("ANOMALY") );
+                _machineState=0;
+            }
+        }
+    /*
+    while(!isStopping()) {
         if(_machineState==-1) {
             ttsSay( yarp::os::ConstString("Sorry, I do not know what that is.") );
             _machineState=0;
@@ -47,7 +97,7 @@ void StateMachine::run() {
             ttsSay( yarp::os::ConstString("ANOMALY") );
             _machineState=0;
         }
-    }
+    }*/
 }
 
 /************************************************************************/
