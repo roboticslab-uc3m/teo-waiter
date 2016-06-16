@@ -58,11 +58,11 @@
 
     <connection>
         <from>/speechRecognition:o</from>
-        <to>/waiterDialogueManager/speechRecognition:i</to>
+        <to>/waiterDialMan/speechRecognition:i</to>
     </connection>
 
     <connection>
-        <from>/waiterDialogueManager/iSpeak:o</from>
+        <from>/waiterDialMan/iSpeak:o</from>
         <to>/icub/speech:rpc</to>
     </connection>
 
