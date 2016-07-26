@@ -63,7 +63,7 @@
 
     <connection>
         <from>/waiterDialMan/iSpeak:o</from>
-        <to>/icub/speech:rpc</to>
+        <to>/tts-en:i</to>
     </connection>
 
 </application>
