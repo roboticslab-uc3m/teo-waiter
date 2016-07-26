@@ -53,7 +53,7 @@ void StateMachine::run() {
                 outCmdPortManip->write(cmd);
                 _machineState=0;
             } else if (_machineState==5) {
-                ttsSay( yarp::os::ConstString("Okay, see you later.") );
+                ttsSay( yarp::os::ConstString("Okay, see you later aligator.") );
                 yarp::os::Bottle cmd;
                 cmd.addVocab(VOCAB_STOP_TEO);
                 outCmdPortHead->write(cmd);
