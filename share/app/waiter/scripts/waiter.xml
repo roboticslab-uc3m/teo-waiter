@@ -62,7 +62,7 @@
     </connection>
 
     <connection>
-        <from>/waiterDialMan/iSpeak:o</from>
+        <from>/waiterDialMan/tts-en:o</from>
         <to>/tts-en:i</to>
     </connection>
 
