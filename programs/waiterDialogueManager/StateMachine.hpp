@@ -46,6 +46,9 @@ protected:
     void ttsSay(const yarp::os::ConstString& sayConstString);
     yarp::os::ConstString asrListen();
 
+    std::string notUnderstand;
+    //... more variables here...
+
 public:
 
     /**
@@ -82,6 +85,8 @@ public:
 
     /** Register an output Port for tts. */
     void setOutTtsPort(yarp::os::Port* outTtsPort);
+
+    bool setLanguage(std::string language);
 
 };
 

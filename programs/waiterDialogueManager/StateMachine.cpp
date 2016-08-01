@@ -17,7 +17,7 @@ bool StateMachine::threadInit() {
 void StateMachine::run() {
     while(!isStopping()) {
             if(_machineState==-1) {
-                ttsSay( yarp::os::ConstString("Sorry, I do not understand.") );
+                ttsSay( notUnderstand );  //-- primer ejemplo de uso de variables!!!
                 _machineState=0;
             } else if(_machineState==0) {
                 ttsSay( yarp::os::ConstString("Please tell me.") );
@@ -147,6 +147,30 @@ void StateMachine::setOutCmdPortManip(yarp::os::Port* outCmdPort) {
 void StateMachine::setOutTtsPort(yarp::os::Port* outTtsPort) {
     this->outTtsPort = outTtsPort;
 }
+
+/************************************************************************/
+
+bool StateMachine::setLanguage(std::string language) {
+    if("english" == language)
+    {
+        notUnderstand = std::string("Sorry, I do not understand.");
+        // more here...
+        return true;
+    }
+    else if("spanish" == language)
+    {
+        notUnderstand = std::string("Disculpe, no le he entendido.");
+        // mas aqui...
+        return true;
+    }
+    else
+    {
+        printf("error! %s????\n",language.c_str());
+        return false;
+    }
+}
+
+
 
 /************************************************************************/
 

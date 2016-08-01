@@ -9,16 +9,15 @@ namespace teo
 
 bool WaiterDialogueManager::configure(yarp::os::ResourceFinder &rf) {
 
-    //ConstString fileName(DEFAULT_FILE_NAME);
-    
+    std::string language = rf.check("language",yarp::os::Value(DEFAULT_LANGUAGE),"language to be used").asString();
+
     printf("--------------------------------------------------------------\n");
     if (rf.check("help")) {
         printf("WaiterDialogueManager options:\n");
         printf("\t--help (this help)\t--from [file.ini]\t--context [path]\n");
-        //printf("\t--file (default: \"%s\")\n",fileName.c_str());
+        printf("\t--language (default: \"%s\")\n",language.c_str());
     }
-    //if (rf.check("file")) fileName = rf.find("file").asString();
-    //printf("WaiterDialogueManager using file: %s\n",fileName.c_str());
+    printf("WaiterDialogueManager using language: %s\n",language.c_str());
 
     printf("--------------------------------------------------------------\n");
     if(rf.check("help")) {
@@ -38,7 +37,8 @@ bool WaiterDialogueManager::configure(yarp::os::ResourceFinder &rf) {
         if(outTtsPort.getOutputCount() > 0) break;
         printf("Waiting for \"/waiterDialogueManager/tts:o\" to be connected to something...\n");
         yarp::os::Time::delay(0.5);
-    }    
+    }
+    stateMachine.setLanguage(language);
     stateMachine.start();
     return true;
 }

@@ -8,7 +8,7 @@
 
 #include "StateMachine.hpp"
 
-//j//#define DEFAULT_FILE_NAME "segRec_ecf_params.xml"
+#define DEFAULT_LANGUAGE "english"
 
 //instrucciones para el followme
 #define VOCAB_FOLLOW_ME VOCAB4('f','o','l','l')
