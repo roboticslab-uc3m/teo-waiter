@@ -6,6 +6,7 @@
 
     <module>
         <name>waiterDialogueManager</name>
+        <parameters>--language english</parameters>
         <node>localhost</node>
     </module>
 
