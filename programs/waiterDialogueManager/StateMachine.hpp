@@ -46,8 +46,18 @@ protected:
     void ttsSay(const yarp::os::ConstString& sayConstString);
     yarp::os::ConstString asrListen();
 
+    // output variables
     std::string notUnderstand;
-    //... more variables here...
+    std::string repeat;
+    std::string hello;
+    std::string drink;
+    std::string take;
+    std::string finish;
+    // input variables
+    std::string hiTeo;
+    std::string goOnTeo;
+    std::string waterPlease;
+    std::string stopNow;
 
 public:
 
