@@ -128,10 +128,10 @@ bool StateMachine::setLanguage(std::string language) {
     if("english" == language)
     {
         //-- recognition sentences
-        hiTeo = std::string ("Hi TEO"); //state 2
-        goOnTeo = std::string ("Go on TEO"); //state 3
+        hiTeo = std::string ("Hello TEO"); //state 2
+        goOnTeo = std::string ("Go TEO"); //state 3
         waterPlease = std::string ("Water please"); //state 4
-        stopNow = std::string ("Stop now"); //state 5
+        stopNow = std::string ("Stop TEO"); //state 5
         //-- speak sentences
         notUnderstand = std::string("Sorry, I do not understand."); //state -1
         repeat = std::string("Please tell me."); //state 0
@@ -144,10 +144,16 @@ bool StateMachine::setLanguage(std::string language) {
     else if("spanish" == language)
     {
         //-- frases de reconociomiento
+        hiTeo = std::string ("Hello TEO"); //state 2
+        goOnTeo = std::string ("Go TEO"); //state 3
+        waterPlease = std::string ("Water please"); //state 4
+        stopNow = std::string ("Stop TEO"); //state 5
+        /*
         hiTeo = std::string ("Hola TEO"); //state 2
         goOnTeo = std::string ("Continua TEO"); //state 3
         waterPlease = std::string ("Agua por favor"); //state 4
         stopNow = std::string ("Hasta luego"); //state 5
+        */
         //-- frases del habla
         notUnderstand = std::string("Disculpe, no le he entendido."); //state -1
         repeat = std::string("Puede grepetirlo."); //state 0
@@ -165,6 +171,7 @@ bool StateMachine::setLanguage(std::string language) {
         }
 
         finish = std::string("Nos vemos pronto."); //state 5
+
         return true;
     }
     else
