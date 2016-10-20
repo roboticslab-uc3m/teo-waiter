@@ -63,8 +63,8 @@
     </connection>
 
     <connection>
-        <from>/waiterDialMan/tts-en:o</from>
-        <to>/tts-en:i</to>
+        <from>/waiterDialMan/tts/rpc:c</from>
+        <to>/tts/rpc:s</to>
     </connection>
 
 </application>
