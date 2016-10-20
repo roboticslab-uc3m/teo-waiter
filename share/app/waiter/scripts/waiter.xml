@@ -2,7 +2,7 @@
     <!-- Descrption for the Waiter Demostration -->
     
 <application>
-<name>waiter App</name>
+<name>waiter_english_App</name>
 
     <module>
         <name>waiterDialogueManager</name>
