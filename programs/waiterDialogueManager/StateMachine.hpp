@@ -37,7 +37,7 @@ protected:
     yarp::os::BufferedPort<yarp::os::Bottle> *inSrPort;
     yarp::os::Port *outCmdPortHead;
     yarp::os::Port *outCmdPortManip;
-    yarp::os::Port *outTtsPort;
+    yarp::os::RpcClient *outTtsPort;
 
     int _machineState;
 
@@ -94,7 +94,7 @@ public:
     void setOutCmdPortManip(yarp::os::Port* outCmdPort);
 
     /** Register an output Port for tts. */
-    void setOutTtsPort(yarp::os::Port* outTtsPort);
+    void setOutTtsPort(yarp::os::RpcClient *outTtsPort);
 
     bool setLanguage(std::string language);
 

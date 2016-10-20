@@ -35,9 +35,14 @@ bool WaiterDialogueManager::configure(yarp::os::ResourceFinder &rf) {
     stateMachine.setInSrPort(&inSrPort);
     while(1){
         if(outTtsPort.getOutputCount() > 0) break;
-        printf("Waiting for \"/waiterDialogueManager/tts:o\" to be connected to something...\n");
+        printf("Waiting for '/waiterDialMan/tts/rpc:c' to be connected to something...\n");
         yarp::os::Time::delay(0.5);
     }
+    yarp::os::Bottle bOut, bRes;
+    bOut.addString("setLanguage");
+    bOut.addString("mb-en1");
+    outTtsPort.write(bOut,bRes);
+
     stateMachine.setLanguage(language);
     stateMachine.start();
     return true;

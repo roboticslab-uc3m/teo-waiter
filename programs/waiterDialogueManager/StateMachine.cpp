@@ -76,10 +76,12 @@ void StateMachine::run() {
 /************************************************************************/
 
 void StateMachine::ttsSay(const yarp::os::ConstString& sayConstString) {
-    yarp::os::Bottle bOut;
+    yarp::os::Bottle bOut, bRes;
+    bOut.addString("say");
     bOut.addString(sayConstString);
-    outTtsPort->write(bOut);
-    printf("[StateMachine] Said: %s\n", sayConstString.c_str());
+    outTtsPort->write(bOut,bRes);
+    printf("[StateMachine] Said: %s [%s]\n", sayConstString.c_str(), bRes.toString().c_str());
+    yarp::os::Time::delay(0.5);
     return;
 }
 
@@ -117,7 +119,7 @@ void StateMachine::setOutCmdPortManip(yarp::os::Port* outCmdPort) {
 
 /************************************************************************/
 
-void StateMachine::setOutTtsPort(yarp::os::Port* outTtsPort) {
+void StateMachine::setOutTtsPort(yarp::os::RpcClient* outTtsPort) {
     this->outTtsPort = outTtsPort;
 }
 
