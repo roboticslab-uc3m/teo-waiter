@@ -40,7 +40,19 @@ bool WaiterDialogueManager::configure(yarp::os::ResourceFinder &rf) {
     }
     yarp::os::Bottle bOut, bRes;
     bOut.addString("setLanguage");
-    bOut.addString("mb-en1");
+    if( language == "english" )
+    {
+        bOut.addString("mb-en1");
+    }
+    else if ( language == "spanish" )
+    {
+        bOut.addString("mb-es1");
+    }
+    else
+    {
+        printf("Language not found. Please use '--language english' or '--language spanish'");
+        return false;
+    }
     outTtsPort.write(bOut,bRes);
 
     stateMachine.setLanguage(language);
