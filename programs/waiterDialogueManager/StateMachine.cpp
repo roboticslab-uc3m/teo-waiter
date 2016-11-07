@@ -130,10 +130,11 @@ bool StateMachine::setLanguage(std::string language) {
     if("english" == language)
     {
         //-- recognition sentences
-        hiTeo = std::string ("Hello TEO"); //state 2
-        goOnTeo = std::string ("Go TEO"); //state 3
-        waterPlease = std::string ("Water please"); //state 4
-        stopNow = std::string ("Stop TEO"); //state 5
+        hiTeo = std::string ("hello teo"); //state 2
+        goOnTeo = std::string ("go teo"); //state 3
+        waterPlease = std::string ("water please"); //state 4
+        stopNow = std::string ("stop teo"); //state 5
+
         //-- speak sentences
         notUnderstand = std::string("Sorry, I do not understand."); //state -1
         repeat = std::string("Please tell me."); //state 0
@@ -150,29 +151,38 @@ bool StateMachine::setLanguage(std::string language) {
         goOnTeo = std::string ("Go TEO"); //state 3
         waterPlease = std::string ("Water please"); //state 4
         stopNow = std::string ("Stop TEO"); //state 5
-        /*
-        hiTeo = std::string ("Hola TEO"); //state 2
-        goOnTeo = std::string ("Continua TEO"); //state 3
-        waterPlease = std::string ("Agua por favor"); //state 4
-        stopNow = std::string ("Hasta luego"); //state 5
-        */
+
         //-- frases del habla
         notUnderstand = std::string("Disculpe, no le he entendido."); //state -1
         repeat = std::string("Puede grepetirlo."); //state 0
         hello = std::string("Hola, me yamo TEO y soy un grobot camarero."); //state 2
 
+        if (X == 1){
+            drink = std::string("Que quiere tomar. Mi especialidad es servir cervezas bien fresquitas pero estoy de servicio."); //state 3
+            X = 2;
+        }
+        if (X == 2){
+            drink = std::string("Que quiere tomar. Te puedo ofrecer cualquier bebida que quieras mientras sea agua."); //state 3
+            X = 3;
+        }
+        if (X == 3){
+            drink = std::string("Que quiere tomar. En nuestro bar hay de todo y gratis."); //state 3
+            X = 1;
+        }
         if (z == 1){
-            drink = std::string("Mi especialidad es servir cervezas bien fresquitas. Quiere una cerveza."); //state 3
-            take = std::string("Aqui tiene su botella."); //state 4
+            take = std::string("Por favor, sirvase."); //state 4
             z = 2;
         }
         if (z == 2){
-            drink = std::string("Tambien puede ofrecerle otras bebidads. Que le apetece."); //state 3
-            take = std::string("Por favor, sirvase."); //state 4
+            take = std::string("Por supuesto, Aqui tiene su botella."); //state 4
+            z = 3;
+        }
+        if (z == 3){
+            take = std::string("Espero que este a su agrado."); //state 4
             z = 1;
         }
 
-        finish = std::string("Nos vemos pronto."); //state 5
+        finish = std::string("De acuerdo. Nos vemos pronto."); //state 5
 
         return true;
     }
