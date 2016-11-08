@@ -34,12 +34,17 @@ namespace teo
 class StateMachine : public yarp::os::Thread {
 protected:
 
+    std::string _language;
+
     yarp::os::BufferedPort<yarp::os::Bottle> *inSrPort;
     yarp::os::Port *outCmdPortHead;
     yarp::os::Port *outCmdPortManip;
     yarp::os::RpcClient *outTtsPort;
 
     int _machineState;
+
+    int z = 1;
+    int x = 1;
 
     yarp::os::ConstString _inStrState1;
 
@@ -97,6 +102,8 @@ public:
     void setOutTtsPort(yarp::os::RpcClient *outTtsPort);
 
     bool setLanguage(std::string language);
+
+    bool setSpeakLanguage(std::string language);
 
 };
 
