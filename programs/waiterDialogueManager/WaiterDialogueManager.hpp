@@ -33,6 +33,7 @@ class WaiterDialogueManager : public yarp::os::RFModule {
     StateMachine stateMachine;
     yarp::os::BufferedPort<yarp::os::Bottle> inSrPort;
     yarp::os::RpcClient outTtsPort;
+    yarp::os::RpcClient outRecognitionPort;
     yarp::os::Port outCmdPortManip;
     yarp::os::Port outCmdPortHead;
 
