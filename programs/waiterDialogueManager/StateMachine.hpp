@@ -43,8 +43,8 @@ protected:
 
     int _machineState;
 
-    int z = 1;
-    int x = 1;
+    int z;
+    int x;
 
     yarp::os::ConstString _inStrState1;
 
@@ -103,7 +103,7 @@ public:
 
     bool setLanguage(std::string language);
 
-    bool setSpeakLanguage(std::string language);
+    bool setSpeakLanguage(std::string language, int _machineState);
 
 };
 

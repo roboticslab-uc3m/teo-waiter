@@ -62,9 +62,8 @@ bool WaiterDialogueManager::configure(yarp::os::ResourceFinder &rf) {
         printf("Language not found. Please use '--language english' or '--language spanish'");
         return false;
     }
-    printf("%s\n", bOut.toString().c_str());
+
     outTtsPort.write(bOut);
-    printf("%s\n", bRec.toString().c_str());
     outRecognitionPort.write(bRec);
 
     stateMachine.setLanguage(language);
