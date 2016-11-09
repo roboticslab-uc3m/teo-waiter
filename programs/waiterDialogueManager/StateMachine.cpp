@@ -19,10 +19,10 @@ bool StateMachine::threadInit() {
 void StateMachine::run() {
     while(!isStopping()) {
             if(_machineState==-1) {
-                ttsSay( notUnderstand );  //-- Sorry, I do not undestand
+                //ttsSay( notUnderstand );  //-- Sorry, I do not undestand
                 _machineState=0;
             } else if(_machineState==0) {
-                ttsSay( repeat );  //-- Please tell me
+                //ttsSay( repeat );  //-- Please tell me
                 _machineState=1;
             } else if(_machineState==1) {
                 yarp::os::ConstString inStr = asrListen();
@@ -31,7 +31,7 @@ void StateMachine::run() {
                 if( _inStrState1.find( hiTeo ) != yarp::os::ConstString::npos ) _machineState=2;  //-- Hi teo
                 else if ( _inStrState1.find( goOnTeo ) != yarp::os::ConstString::npos ) _machineState=3;  //-- Go on teo
                 else if ( _inStrState1.find( waterPlease) != yarp::os::ConstString::npos ) _machineState=4;  //-- Water please
-                else if ( _inStrState1.find( stopNow ) != yarp::os::ConstString::npos ) _machineState=5;  //-- Stop now
+                else if ( _inStrState1.find( stopTEO ) != yarp::os::ConstString::npos ) _machineState=5;  //-- Stop now
                 else _machineState=-1;
 
                 setSpeakLanguage(_language, _machineState);
@@ -129,20 +129,20 @@ bool StateMachine::setLanguage(std::string language)
     if("english" == language)
     {
         //-- recognition sentences
-        hiTeo = std::string ("hi");            //state 2
-        goOnTeo = std::string ("thanks");      //state 3
-        waterPlease = std::string ("water");   //state 4
-        stopNow = std::string ("stop");        //state 5
+        hiTeo = std::string ("hi teo");            //state 2
+        goOnTeo = std::string ("thank you");      //state 3
+        waterPlease = std::string ("give me water");   //state 4
+        stopTEO = std::string ("stop teo");        //state 5
 
         return true;
     }
     else if("spanish" == language)
     {
         //-- frases de reconociomiento
-        hiTeo = std::string ("hi");            //state 2
-        goOnTeo = std::string ("thanks");      //state 3
-        waterPlease = std::string ("water");   //state 4
-        stopNow = std::string ("stop");        //state 5
+        hiTeo = std::string ("hi teo");            //state 2
+        goOnTeo = std::string ("thank you");      //state 3
+        waterPlease = std::string ("give me water");   //state 4
+        stopTEO = std::string ("stop teo");        //state 5
 
         return true;
     }

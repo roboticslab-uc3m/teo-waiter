@@ -62,7 +62,7 @@ protected:
     std::string hiTeo;
     std::string goOnTeo;
     std::string waterPlease;
-    std::string stopNow;
+    std::string stopTEO;
 
 public:
 
