@@ -55,7 +55,7 @@ bool WaiterDialogueManager::configure(yarp::os::ResourceFinder &rf) {
     else if ( language == "spanish" )
     {
         bOut.addString("mb-es1");
-        bRec.addString(language);
+        bRec.addString("english"); // -- cambiar a "language" cuando tengamos reconocimiento en español
     }
     else
     {
