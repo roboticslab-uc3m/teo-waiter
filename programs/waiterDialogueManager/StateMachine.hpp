@@ -22,7 +22,6 @@
 #define VOCAB_WATER_PLEASE VOCAB4('w','p','l','e')
 #define VOCAB_STOP_TEO VOCAB4('s','t','e','o')
 
-
 namespace teo
 {
 
@@ -35,21 +34,16 @@ class StateMachine : public yarp::os::Thread {
 protected:
 
     std::string _language;
+    int _machineState;
+    yarp::os::ConstString _inStrState1;
 
     yarp::os::BufferedPort<yarp::os::Bottle> *inSrPort;
     yarp::os::Port *outCmdPortHead;
     yarp::os::Port *outCmdPortManip;
     yarp::os::RpcClient *outTtsPort;
 
-    int _machineState;
-
     int z;
     int x;
-
-    yarp::os::ConstString _inStrState1;
-
-    void ttsSay(const yarp::os::ConstString& sayConstString);
-    yarp::os::ConstString asrListen();
 
     // output variables
     std::string notUnderstand;
@@ -63,6 +57,9 @@ protected:
     std::string goOnTeo;
     std::string waterPlease;
     std::string stopTEO;
+
+    void ttsSay(const yarp::os::ConstString& sayConstString);
+    yarp::os::ConstString asrListen();
 
 public:
 
@@ -101,8 +98,10 @@ public:
     /** Register an output Port for tts. */
     void setOutTtsPort(yarp::os::RpcClient *outTtsPort);
 
+    /** set language in speechRecognition port */
     bool setLanguage(std::string language);
 
+    /** set language for speaking */
     bool setSpeakLanguage(std::string language, int _machineState);
 
 };

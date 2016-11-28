@@ -11,7 +11,7 @@
  *
  * Copyright: 2016 (C) Universidad Carlos III de Madrid
  *
- * Author: Juan Hernandez 2016
+ * Author: Juan Hernandez y Juan Miguel Garcia 2016
  *
  * CopyPolicy: This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License 3.0 or later

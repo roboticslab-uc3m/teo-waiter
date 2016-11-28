@@ -126,8 +126,8 @@ void StateMachine::setOutTtsPort(yarp::os::RpcClient* outTtsPort) {
 bool StateMachine::setLanguage(std::string language)
 {
     _language = language;
-    if("english" == language)
-    {
+    if("english" == language)    {
+
         //-- recognition sentences
         hiTeo = std::string ("hi teo");            //state 2
         goOnTeo = std::string ("thank you");      //state 3
@@ -136,8 +136,8 @@ bool StateMachine::setLanguage(std::string language)
 
         return true;
     }
-    else if("spanish" == language)
-    {
+    else if("spanish" == language)    {
+
         //-- frases de reconociomiento
         hiTeo = std::string ("hi teo");            //state 2
         goOnTeo = std::string ("thank you");      //state 3
@@ -146,8 +146,7 @@ bool StateMachine::setLanguage(std::string language)
 
         return true;
     }
-    else
-    {
+    else    {
         printf("error! %s????\n",language.c_str());
         return false;
     }
@@ -157,27 +156,27 @@ bool StateMachine::setLanguage(std::string language)
 
 bool StateMachine::setSpeakLanguage(std::string language, int _machineState) {
 
-    if("english" == language)
-    {
-                //-- speak sentences
+    if("english" == language)    {
+
+        //-- speak sentences
         notUnderstand = std::string("Sorry, I do not understand."); //state -1
         repeat = std::string("Please tell me."); //state 0
         hello = std::string("Hi, I am teo, your waiter."); //state 2
         drink = std::string("Are you thirsty."); //state 3
         take = std::string("Here you are."); //state 4
         finish = std::string("Okay, see you later aligator."); //state 5
+
         return true;
     }
-    else if("spanish" == language)
-    {
-        printf("--------->> %d y %d\n", x, z);
-                //-- frases del habla
+    else if("spanish" == language)    {
+
+        //-- frases del habla
         notUnderstand = std::string("Disculpa, no te he entendido."); //state -1
         repeat = std::string("Puedes grepetirlo."); //state 0
         hello = std::string("Hola, me yamo TEO y si quieres, seré tu grobot camarero."); //state 2
+        finish = std::string("Me parece bien. Nos vemos pronto."); //state 5
 
-        if (_machineState == 3)
-        {
+        if (_machineState == 3)        {
             switch (x) {
             case 1:
                 drink = std::string("Que quiere tomar. Mi especialidad es servir cervezas bien fresquitas pero estoy de servicio."); //state 3
@@ -195,8 +194,8 @@ bool StateMachine::setSpeakLanguage(std::string language, int _machineState) {
                 break;
             }
         }
-        if(_machineState == 4)
-        {
+
+        if(_machineState == 4)        {
             switch (z) {
             case 1:
                 take = std::string("Por favor, sirvase."); //state 4
@@ -213,15 +212,12 @@ bool StateMachine::setSpeakLanguage(std::string language, int _machineState) {
             default:
                 break;
             }
-
         }
 
-        finish = std::string("Me parece bien. Nos vemos pronto."); //state 5
-
         return true;
+
     }
-    else
-    {
+    else    {
         printf("error! %s????\n",language.c_str());
         return false;
     }

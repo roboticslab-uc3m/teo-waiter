@@ -28,8 +28,8 @@ bool WaiterDialogueManager::configure(yarp::os::ResourceFinder &rf) {
     outCmdPortHead.open("/waiterDialMan/Manip/command:o");
     outCmdPortManip.open("/waiterDialMan/Head/command:o");
     outTtsPort.open("/waiterDialMan/tts/rpc:c");
-    outRecognitionPort.open("/waiterDialMan/speechRecognition/setDictionary/rpc:c");
-    inSrPort.open("/waiterDialMan/speechRecognition:i");
+    outRecognitionPort.open("/waiterDialMan/speechRecognition/setDictionary/rpc:c"); // -- setDictionary (client)
+    inSrPort.open("/waiterDialMan/speechRecognition:i"); // -- words (input)
     stateMachine.setOutCmdPortHead(&outCmdPortHead);
     stateMachine.setOutCmdPortManip(&outCmdPortManip);
     stateMachine.setOutTtsPort(&outTtsPort);
@@ -43,22 +43,20 @@ bool WaiterDialogueManager::configure(yarp::os::ResourceFinder &rf) {
     }
     yarp::os::Bottle bOut,  bRec;
 
+    //-----------------ACTIVE IDIOM FOR DICTIONARY------------//
     bOut.addString("setLanguage");
     bRec.addString("setDictionary");
     bRec.addString("waiter");
 
-    if( language == "english" )
-    {
+    if( language == "english" )    {
         bOut.addString("mb-en1");
         bRec.addString(language );
     }
-    else if ( language == "spanish" )
-    {
+    else if ( language == "spanish" )    {
         bOut.addString("mb-es1");
         bRec.addString("english"); // -- cambiar a "language" cuando tengamos reconocimiento en español
     }
-    else
-    {
+    else    {
         printf("Language not found. Please use '--language english' or '--language spanish'");
         return false;
     }
