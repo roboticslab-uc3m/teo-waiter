@@ -9,16 +9,12 @@ namespace teo
 
 bool WaiterExecManip::configure(ResourceFinder &rf) {
 
-    //ConstString fileName(DEFAULT_FILE_NAME);
-    
     printf("--------------------------------------------------------------\n");
     if (rf.check("help")) {
         printf("WaiterExecManip options:\n");
         printf("\t--help (this help)\t--from [file.ini]\t--context [path]\n");
         //printf("\t--file (default: \"%s\")\n",fileName.c_str());
     }
-    //if (rf.check("file")) fileName = rf.find("file").asString();
-    //printf("WaiterExecManip using file: %s\n",fileName.c_str());
 
     printf("--------------------------------------------------------------\n");
     if(rf.check("help")) {
