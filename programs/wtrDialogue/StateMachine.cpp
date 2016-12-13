@@ -51,9 +51,17 @@ void StateMachine::run() {
                 outCmdPortManip->write(cmd);
                 _machineState=1;
             } else if (_machineState==4) {
-                ttsSay( take );  //-- Here you are
+                ttsSay( take1 );  //-- Okey
                 yarp::os::Bottle cmd;
                 cmd.addVocab(VOCAB_WATER_PLEASE);
+                outCmdPortHead->write(cmd);
+                outCmdPortManip->write(cmd);
+                _machineState=6;
+                yarp::os::Time::delay(0.5); // ESPERAR PARA SINCRONIZAR //
+            } else if (_machineState==6) {
+                ttsSay( take2 );  //-- Here you are
+                yarp::os::Bottle cmd;
+                cmd.addVocab(VOCAB_SECOND_MOVEMENT);
                 outCmdPortHead->write(cmd);
                 outCmdPortManip->write(cmd);
                 _machineState=1;
@@ -163,7 +171,7 @@ bool StateMachine::setSpeakLanguage(std::string language, int _machineState) {
         repeat = std::string("Please tell me."); //state 0
         hello = std::string("Hi, I am teo, your waiter."); //state 2
         drink = std::string("Are you thirsty."); //state 3
-        take = std::string("Here you are."); //state 4
+        take1 = std::string("Here you are."); //state 4
         finish = std::string("Okay, see you later aligator."); //state 5
 
         return true;
@@ -174,6 +182,7 @@ bool StateMachine::setSpeakLanguage(std::string language, int _machineState) {
         notUnderstand = std::string("Disculpa, no te he entendido."); //state -1
         repeat = std::string("Puedes grepetirlo."); //state 0
         hello = std::string("Hola, me yamo TEO y si quieres, seré tu grobot camarero."); //state 2
+        take1 = std::string("Por supuesto."); //state 4
         finish = std::string("Me parece bien. Nos vemos pronto."); //state 5
 
         if (_machineState == 3)        {
@@ -198,15 +207,15 @@ bool StateMachine::setSpeakLanguage(std::string language, int _machineState) {
         if(_machineState == 4)        {
             switch (z) {
             case 1:
-                take = std::string("Por favor, sirvase."); //state 4
+                take2 = std::string("Por favor, sirvase."); //state 6
                 z = 2;
                 break;
             case 2:
-                take = std::string("Por supuesto, Aqui tiene su boteya."); //state 4
+                take2 = std::string("Aqui tiene su boteya."); //state 6
                 z = 3;
                 break;
             case 3:
-                take = std::string("Espero que, este a su agrado."); //state 4
+                take2 = std::string("Espero que, este a su agrado."); //state 6
                 z = 1;
                 break;
             default:

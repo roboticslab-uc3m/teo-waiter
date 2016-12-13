@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
     rf.setDefaultConfigFile("wtrHead.ini");
     rf.configure(argc, argv);
 
-    teo::WaiterExecHead mod;
+    teo::WtrHead mod;
     if(rf.check("help")) {
         return mod.runModule(rf);
     }

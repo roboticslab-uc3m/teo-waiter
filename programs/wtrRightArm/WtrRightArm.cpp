@@ -27,7 +27,7 @@ bool WtrRightArm::configure(ResourceFinder &rf) {
     rightArmOptions.put("local","/waiterRightArm/teo/leftArm");
     rightArmOptions.put("remote","/teo/RightArm");
     rightArmDevice.open(rightArmOptions);
-    if( ! leftArmDevice.isValid() ) {
+    if( ! rightArmDevice.isValid() ) {
         printf("rightArm remote_controlboard instantiation not worked.\n");
         return false;
     }
@@ -36,6 +36,7 @@ bool WtrRightArm::configure(ResourceFinder &rf) {
         return false;
     }
     inCvPort.setIPositionControl(iPositionControl);
+    iPositionControl->setPositionMode();
 
     //-----------------OPEN LOCAL PORTS------------//
     inSrPort.setInCvPortPtr(&inCvPort);

@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
     rf.setDefaultConfigFile("wtrLeftArm.ini");
     rf.configure(argc, argv);
 
-    teo::WaiterExecManip mod;
+    teo::WtrLeftArm mod;
     if(rf.check("help")) {
         return mod.runModule(rf);
     }

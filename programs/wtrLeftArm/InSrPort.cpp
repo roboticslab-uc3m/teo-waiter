@@ -21,9 +21,13 @@ void InSrPort::onRead(Bottle& b) {
             printf("water please\n");
             inCvPortPtr->setFollow(3);
             break;
+        case VOCAB_SECOND_MOVEMENT:
+            printf("water please\n");
+            inCvPortPtr->setFollow(4);
+            break;
         case VOCAB_STOP_TEO:
             printf("stop teo\n");
-            inCvPortPtr->setFollow(4);
+            inCvPortPtr->setFollow(5);
             break;
         default:
             break;
