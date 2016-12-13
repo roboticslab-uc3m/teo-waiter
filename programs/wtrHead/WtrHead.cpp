@@ -48,8 +48,8 @@ bool WtrHead::configure(ResourceFinder &rf) {
     inSrPort.setInCvPortPtr(&inCvPort);
     inCvPort.useCallback();
     inSrPort.useCallback();
-    inSrPort.open("/waiterHead/DialogueManager/command:i");
-    inCvPort.open("/waiterHead/cvBottle/state:i");
+    inSrPort.open("/wtrHead/Dialogue/command:i");
+    inCvPort.open("/wtrHead/cvBottle/state:i");
 
     return true;
 }

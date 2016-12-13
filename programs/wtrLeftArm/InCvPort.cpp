@@ -102,13 +102,13 @@ void InCvPort::onRead(Bottle& b) {
                 fflush(stdout);
             }
 
-            iPositionControl->positionMove(0, -40);
+            /*iPositionControl->positionMove(0, -40);
             iPositionControl->positionMove(1, -10);
             iPositionControl->positionMove(2, 55);
             iPositionControl->positionMove(3, -60);
             iPositionControl->positionMove(4, -25);
             iPositionControl->positionMove(5, 0);
-            iPositionControl->positionMove(6, 0);
+            iPositionControl->positionMove(6, 0);*/
             break;
         }
         case 4: {//VOCAB_SECOND_MOVEMENT

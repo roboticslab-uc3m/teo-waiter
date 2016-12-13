@@ -171,7 +171,8 @@ bool StateMachine::setSpeakLanguage(std::string language, int _machineState) {
         repeat = std::string("Please tell me."); //state 0
         hello = std::string("Hi, I am teo, your waiter."); //state 2
         drink = std::string("Are you thirsty."); //state 3
-        take1 = std::string("Here you are."); //state 4
+        take1 = std::string("Ok."); //state 4
+        take2 = std::string("Here you are."); //state 6
         finish = std::string("Okay, see you later aligator."); //state 5
 
         return true;

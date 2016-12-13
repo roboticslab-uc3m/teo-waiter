@@ -17,7 +17,8 @@ project(WAITER)
 ### options: cpp libraries
 #option(ENABLE_ExampleLibrary "Choose if you want to compile ExampleLibrary" TRUE)
 
-### options: cpp programs
+### options: cpp programs 
+option(ENABLE_wtrArms "Choose if you want to compile wtrArms" TRUE)
 option(ENABLE_wtrDialogue "Choose if you want to compile wtrDialogue" TRUE)
 option(ENABLE_wtrHead "Choose if you want to compile wtrHead" TRUE)
 option(ENABLE_wtrLeftArm "Choose if you want to compile wtrLeftArm" TRUE)
