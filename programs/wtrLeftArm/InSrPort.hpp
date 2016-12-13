@@ -13,7 +13,7 @@
 #define VOCAB_FOLLOW_ME VOCAB4('f','o','l','l')
 #define VOCAB_STOP_FOLLOWING VOCAB4('s','f','o','l')
 
-//insatrucciones para el waiterbot
+//instrucciones para el waiterbot
 #define VOCAB_HELLO_TEO VOCAB4('e','l','o','t')
 #define VOCAB_GO_TEO VOCAB4('g','t','e','o')
 #define VOCAB_WATER_PLEASE VOCAB4('w','p','l','e')
