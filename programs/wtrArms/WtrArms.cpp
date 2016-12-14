@@ -16,7 +16,7 @@ bool WtrArms::configure(yarp::os::ResourceFinder &rf)
     {
         printf("WtrArms options:\n");
         printf("\t--help (this help)\t--from [file.ini]\t--context [path]\n");
-        printf("\t--robot: %s [%s]\n",robot.c_str(),DEFAULT_ROBOT);
+        printf("\t--robot: %s [%sSim]\n",robot.c_str(),DEFAULT_ROBOT);
         ::exit(0);
     }
 
@@ -101,7 +101,8 @@ bool WtrArms::movingArmJoints(std::vector<double>& leftArmQ, std::vector<double>
     rightArmIPositionControl->positionMove( rightArmQ.data() );
     leftArmIPositionControl->positionMove( leftArmQ.data() );
     //printf("Waiting for right arm.");
-    bool done = false;
+
+    bool done = false; // checking the position move
     while((!done)&&(!Thread::isStopping()))
     {
         rightArmIPositionControl->checkMotionDone(&done);
@@ -144,18 +145,18 @@ void WtrArms::run()
             case VOCAB_HELLO_TEO: {//VOCAB_HELLO_TEO
 
                 printf("Salute\n");
-
-                std::vector<double> leftArmQ(-20, -10, 0, -60, 10, -10, 0);
-                std::vector<double> rightArmQ(0, 0, 0, 0, 0, 0, 0);
+                {
+                std::vector<double> leftArmQ(7,0.0);
+                std::vector<double> rightArmQ(7,0.0);
+                leftArmQ[0] = -20;
+                leftArmQ[1] = -10;
+                leftArmQ[2] = 0;
+                leftArmQ[3] = -60;
+                leftArmQ[4] = 10;
+                leftArmQ[5] = -10;
                 movingArmJoints(leftArmQ,rightArmQ);
+                }
 
-                /*iPositionControl->positionMove(0, -20);
-                iPositionControl->positionMove(1, -10);
-                iPositionControl->positionMove(2, 0);
-                iPositionControl->positionMove(3, -60);
-                iPositionControl->positionMove(4, 10);
-                iPositionControl->positionMove(5, -10);
-                iPositionControl->positionMove(6, 0);*/
                 break;
             }
 
@@ -168,16 +169,6 @@ void WtrArms::run()
                     printf("begin MOVE TO Pa POSITION\n");
                     double Pa[7] = {-30, 40, 0, -70, -40, 10, 0};
                     leftArmIPositionControl->positionMove(Pa);
-
-                    /*printf("MOVE TO POSITION 01\n");
-                    iPositionControl->positionMove(0, -30);
-                    iPositionControl->positionMove(1, 40);
-                    iPositionControl->positionMove(2, 0);
-                    iPositionControl->positionMove(3, -70);
-                    iPositionControl->positionMove(4, -40);
-                    iPositionControl->positionMove(5, 10);
-                    iPositionControl->positionMove(6, 0);*/
-
                     yarp::os::Time::delay(3);
                     a=1;
                 } // MOVIMIENTO NUMERO 1
@@ -186,16 +177,6 @@ void WtrArms::run()
                     printf("begin MOVE TO Pb POSITION\n");
                     double Pb[7] = {-20, 30, 0, -80, -30, 10, 0};
                     leftArmIPositionControl->positionMove(Pb);
-
-                    /*printf("MOVE TO POSITION 02\n");
-                    iPositionControl->positionMove(0, -20);
-                    iPositionControl->positionMove(1, 30);
-                    iPositionControl->positionMove(2, 0);
-                    iPositionControl->positionMove(3, -80);
-                    iPositionControl->positionMove(4, -30);
-                    iPositionControl->positionMove(5, 10);
-                    iPositionControl->positionMove(6, 0);*/
-
                     yarp::os::Time::delay(3);
                     a=2;
                 } // MOVIMIENTO NUMERO 2
@@ -204,16 +185,6 @@ void WtrArms::run()
                     printf("begin MOVE TO Pc POSITION\n");
                     double Pc[7] = {-30, -10, 0, -70, 10, 10, 0};
                     leftArmIPositionControl->positionMove(Pc);
-
-                    /*printf("MOVE TO POSITION 03\n");
-                    iPositionControl->positionMove(0, -30);
-                    iPositionControl->positionMove(1, -10);
-                    iPositionControl->positionMove(2, 0);
-                    iPositionControl->positionMove(3, -70);
-                    iPositionControl->positionMove(4, 10);
-                    iPositionControl->positionMove(5, 10);
-                    iPositionControl->positionMove(6, 0);*/
-
                     yarp::os::Time::delay(3);
                     a=0;
                 } // MOVIMIENTO NUMERO 3
@@ -223,155 +194,222 @@ void WtrArms::run()
 
             case VOCAB_WATER_PLEASE: {//VOCAB_WATER_PLEASE
 
-                printf("giving water - 2nd part\n");
+                printf("giving water - 1st part\n");
 
-            /*{
+              /*// puntos de aproximacion
+                // Punto P5:  (66.080841 5.975395 -26.871704 35.413006 -70.808441 3.163445 0.0) [tsta] 10 1481555264.023854 [ok]
+                // Punto PF:  (58.17223 0.175747 -55.782074 71.616875 -38.82251 28.20738 0.0) [tsta] 13 1481551585.858203 [ok]
+                // Punto P4:  (57.732864 0.790861 -44.797882 71.968369 -38.91037 38.927944 0.0) [tsta] 9 1481553507.348431 [ok]
+                // PUNTO P3  (57.820736 -5.606323 -44.797882 71.968369 -38.91037 45.782074 0.0) [tsta] 10 1481553695.392905 [ok]
+                // PUNTO P2  (57.469242 -12.108978 -41.54657 71.968369 -38.99826 53.427063 0.0) [tsta] 11 1481553769.980141 [ok]
+                // PUNTO P1  (53.60281 -11.933228 -16.063263 49.03339 -38.91037 25.219683 0.0)*/
+
+    // PUNTO P1  (53.60281 -11.933228 -16.063263 49.03339 -38.91037 25.219683 0.0)
+
+                {
                 std::vector<double> leftArmQ(7,0.0);
                 std::vector<double> rightArmQ(7,0.0);
-                rightArmQ[0] = 45;
-                rightArmQ[2] = 20;
-                rightArmQ[3] = 80;
-                movingArmJoints(leftArmQ,rightArmQ);
-            }*/
+                leftArmQ[0] = -40;
+                leftArmQ[1] = -10;
+                leftArmQ[2] = 55;
+                leftArmQ[3] = -60;
+                leftArmQ[4] = -25;
+                leftArmQ[5] = 0;
 
-                printf("begin MOVE TO P1 POSITION\n");
-                double P1[7] = {-20, -10, 0, -60, 10, -10, 0};
-                iPositionControl->positionMove(P1);
-                bool done1 = false;
-                while( ! done1 )    {
-                    yarp::os::Time::delay(0.2);
-                    iPositionControl->checkMotionDone(&done1);
-                    printf(".");
-                    fflush(stdout);
+                rightArmQ[0] = 53.60281;
+                rightArmQ[1] = -11.933228;
+                rightArmQ[2] = -16.063263;
+                rightArmQ[3] = 49.03339;
+                rightArmQ[4] = -38.91037;
+                rightArmQ[5] = 25.219683;
+                rightArmQ[6] = 0;
+                movingArmJoints(leftArmQ,rightArmQ);
                 }
 
-                /*iPositionControl->positionMove(0, -40);
-                iPositionControl->positionMove(1, -10);
-                iPositionControl->positionMove(2, 55);
-                iPositionControl->positionMove(3, -60);
-                iPositionControl->positionMove(4, -25);
-                iPositionControl->positionMove(5, 0);
-                iPositionControl->positionMove(6, 0);*/
+    // PUNTO P2  (57.469242 -12.108978 -41.54657 71.968369 -38.99826 53.427063 0.0)
+
+                {
+                std::vector<double> leftArmQ(7,0.0);
+                std::vector<double> rightArmQ(7,0.0);
+                leftArmQ[0] = -40;
+                leftArmQ[1] = -10;
+                leftArmQ[2] = 55;
+                leftArmQ[3] = -60;
+                leftArmQ[4] = -25;
+                leftArmQ[5] = 0;
+
+                rightArmQ[0] = 57.469242;
+                rightArmQ[1] = -12.108978;
+                rightArmQ[2] = -41.54657;
+                rightArmQ[3] = 71.968369;
+                rightArmQ[4] = -38.99826;
+                rightArmQ[5] = 53.427063;
+                rightArmQ[6] = 0;
+                movingArmJoints(leftArmQ,rightArmQ);
+                }
+
+    // PUNTO P3  (57.820736 -5.606323 -44.797882 71.968369 -38.91037 45.782074 0.0)
+
+                {
+                std::vector<double> leftArmQ(7,0.0);
+                std::vector<double> rightArmQ(7,0.0);
+                leftArmQ[0] = -40;
+                leftArmQ[1] = -10;
+                leftArmQ[2] = 55;
+                leftArmQ[3] = -60;
+                leftArmQ[4] = -25;
+                leftArmQ[5] = 0;
+
+                rightArmQ[0] = 57.820736;
+                rightArmQ[1] = -5.606323;
+                rightArmQ[2] = -44.797882;
+                rightArmQ[3] = 71.968369;
+                rightArmQ[4] = -38.91037;
+                rightArmQ[5] = 45.782074;
+                rightArmQ[6] = 0;
+                movingArmJoints(leftArmQ,rightArmQ);
+                }
+
+    // Punto P4:  (57.732864 0.790861 -44.797882 71.968369 -38.91037 38.927944 0.0)
+
+                {
+                std::vector<double> leftArmQ(7,0.0);
+                std::vector<double> rightArmQ(7,0.0);
+                leftArmQ[0] = -40;
+                leftArmQ[1] = -10;
+                leftArmQ[2] = 55;
+                leftArmQ[3] = -60;
+                leftArmQ[4] = -25;
+                leftArmQ[5] = 0;
+
+                rightArmQ[0] = 57.732864;
+                rightArmQ[1] = 0.790861;
+                rightArmQ[2] = -44.797882;
+                rightArmQ[3] = 71.968369;
+                rightArmQ[4] = -38.91037;
+                rightArmQ[5] = 38.927944;
+                rightArmQ[6] = 0;
+                movingArmJoints(leftArmQ,rightArmQ);
+                }
+
+    // Punto PF:  (58.17223 0.175747 -55.782074 71.616875 -38.82251 28.20738 0.0)
+
+                {
+                std::vector<double> leftArmQ(7,0.0);
+                std::vector<double> rightArmQ(7,0.0);
+                leftArmQ[0] = -40;
+                leftArmQ[1] = -10;
+                leftArmQ[2] = 55;
+                leftArmQ[3] = -60;
+                leftArmQ[4] = -25;
+                leftArmQ[5] = 0;
+
+                rightArmQ[0] = 58.17223;
+                rightArmQ[1] = 0.175747;
+                rightArmQ[2] = -55.782074;
+                rightArmQ[3] = 71.616875;
+                rightArmQ[4] = -38.82251;
+                rightArmQ[5] = 28.20738;
+                rightArmQ[6] = 0;
+                movingArmJoints(leftArmQ,rightArmQ);
+                }
+
+    // Close right hand
+
+                {
+                std::vector<double> leftArmQ(7,0.0);
+                std::vector<double> rightArmQ(7,0.0);
+                leftArmQ[0] = -40;
+                leftArmQ[1] = -10;
+                leftArmQ[2] = 55;
+                leftArmQ[3] = -60;
+                leftArmQ[4] = -25;
+                leftArmQ[5] = 0;
+
+                rightArmQ[0] = 58.17223;
+                rightArmQ[1] = 0.175747;
+                rightArmQ[2] = -55.782074;
+                rightArmQ[3] = 71.616875;
+                rightArmQ[4] = -38.82251;
+                rightArmQ[5] = 28.20738;
+                rightArmQ[6] = 1;
+                movingArmJoints(leftArmQ,rightArmQ);
+                }
+
+                yarp::os::Time::delay(1);
                 break;
             }
 
             case VOCAB_SECOND_MOVEMENT: {//VOCAB_SECOND_MOVEMENT
 
-                printf("giving water - 1st part\n");
-                double P1[7] = {-20, -10, 0, -60, 10, -10, 0};
-                iPositionControl->positionMove(P1);
-                bool done1 = false;
-                while( ! done1 )    {
-                    yarp::os::Time::delay(0.2);
-                    iPositionControl->checkMotionDone(&done1);
-                    printf(".");
-                    fflush(stdout);
-                }
-                break;
+                printf("giving water - 2nd part\n");
+
+    // Punto P5:  (66.080841 5.975395 -26.871704 35.413006 -70.808441 3.163445 0.0)
 
                 {
-                    std::vector<double> leftArmQ(-20, -10, 0, -60, 10, -10, 0);
-                    std::vector<double> rightArmQ(7,0.0);
-                    rightArmQ[0] = 45;
-                    rightArmQ[2] = 20;
-                    rightArmQ[3] = 80;
-                    movingArmJoints(leftArmQ,rightArmQ);
+                std::vector<double> leftArmQ(7,0.0);
+                std::vector<double> rightArmQ(7,0.0);
+                leftArmQ[0] = -20;
+                leftArmQ[1] = -10;
+                leftArmQ[2] = 0;
+                leftArmQ[3] = -60;
+                leftArmQ[4] = 10;
+                leftArmQ[5] = -10;
+
+                rightArmQ[0] = 66.080841;
+                rightArmQ[1] = 5.975395;
+                rightArmQ[2] = -26.871704;
+                rightArmQ[3] = 35.413006;
+                rightArmQ[4] = -70.808441;
+                rightArmQ[5] = 3.163445;
+                rightArmQ[6] = 0;
+                movingArmJoints(leftArmQ,rightArmQ);
                 }
+
+                yarp::os::Time::delay(2);
+
+    // Open right hand
+
+                {
+                std::vector<double> leftArmQ(7,0.0);
+                std::vector<double> rightArmQ(7,0.0);
+                leftArmQ[0] = -20;
+                leftArmQ[1] = -10;
+                leftArmQ[2] = 0;
+                leftArmQ[3] = -60;
+                leftArmQ[4] = 10;
+                leftArmQ[5] = -10;
+
+                rightArmQ[0] = 66.080841;
+                rightArmQ[1] = 5.975395;
+                rightArmQ[2] = -26.871704;
+                rightArmQ[3] = 35.413006;
+                rightArmQ[4] = -70.808441;
+                rightArmQ[5] = 3.163445;
+                rightArmQ[6] = 0;
+                movingArmJoints(leftArmQ,rightArmQ);
+                }
+
+                yarp::os::Time::delay(1);
+
                 state = VOCAB_HELLO_TEO;
+                break;
             }
 
             case VOCAB_STOP_TEO: {//VOCAB_STOP_TEO
 
                 printf("homing\n");
 
-                std::vector<double> leftArmQ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-                std::vector<double> rightArmQ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+                std::vector<double> leftArmQ(7,0.0);
+                std::vector<double> rightArmQ(7,0.0);
                 movingArmJoints(leftArmQ,rightArmQ);
 
-                /*iPositionControl->positionMove(0, 0);
-                iPositionControl->positionMove(1, 0);
-                iPositionControl->positionMove(2, 0);
-                iPositionControl->positionMove(3, 0);
-                iPositionControl->positionMove(4, 0);
-                iPositionControl->positionMove(5, 0);
-                iPositionControl->positionMove(6, 0);*/
                 break;
             }
             default:
                 break;
         }
 
-
-        /*switch (state)
-        {
-        case VOCAB_STATE_ARM_SWINGING:
-            if(phase)
-            {
-                printf("Phase: true\n");
-                std::vector<double> leftArmQ(7,0.0);
-                leftArmQ[0] = 20;
-                leftArmQ[1] = 5;
-                std::vector<double> rightArmQ(7,0.0);
-                rightArmQ[0] = 20;
-                movingArmJoints(leftArmQ,rightArmQ);
-                phase = false;
-            }
-            else
-            {
-                printf("Phase: false\n");
-                std::vector<double> leftArmQ(7,0.0);
-                leftArmQ[0] = -20;
-                leftArmQ[1] = 5;
-                std::vector<double> rightArmQ(7,0.0);
-                rightArmQ[0] = -20;
-                movingArmJoints(leftArmQ,rightArmQ);
-                phase = true;
-            }
-            break;
-
-        case VOCAB_STATE_SALUTE:
-            printf("Salute\n");
-            {
-                std::vector<double> leftArmQ(7,0.0);
-                std::vector<double> rightArmQ(7,0.0);
-                rightArmQ[0] = 45;
-                rightArmQ[2] = 20;
-                rightArmQ[3] = 80;
-                movingArmJoints(leftArmQ,rightArmQ);
-            }
-            {
-                std::vector<double> leftArmQ(7,0.0);
-                std::vector<double> rightArmQ(7,0.0);
-                rightArmQ[0] = 45;
-                rightArmQ[2] = -20;
-                rightArmQ[3] = 80;
-                movingArmJoints(leftArmQ,rightArmQ);
-            }
-            {
-                std::vector<double> leftArmQ(7,0.0);
-                std::vector<double> rightArmQ(7,0.0);
-                rightArmQ[0] = 45;
-                rightArmQ[2] = 20;
-                rightArmQ[3] = 80;
-                movingArmJoints(leftArmQ,rightArmQ);
-            }
-            state = VOCAB_STATE_ARM_SWINGING;
-            break;
-
-        case VOCAB_STOP_FOLLOWING:
-            printf("Stop Following\n");
-            {
-                std::vector<double> leftArmQ(7,0.0);
-                std::vector<double> rightArmQ(7,0.0);
-
-                movingArmJoints(leftArmQ,rightArmQ);
-            }
-            break;
-
-        default:
-            printf("Bad state!\n");
-            break;
-        }*/
     }
 
     return;

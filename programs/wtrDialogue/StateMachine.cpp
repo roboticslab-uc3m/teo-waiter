@@ -57,7 +57,7 @@ void StateMachine::run() {
                 outCmdPortHead->write(cmd);
                 outCmdPortManip->write(cmd);
                 _machineState=6;
-                yarp::os::Time::delay(0.5); // ESPERAR PARA SINCRONIZAR //
+                yarp::os::Time::delay(15); // ESPERAR PARA SINCRONIZAR //
             } else if (_machineState==6) {
                 ttsSay( take2 );  //-- Here you are
                 yarp::os::Bottle cmd;
