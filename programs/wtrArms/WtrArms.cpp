@@ -222,7 +222,7 @@ void WtrArms::run()
                 rightArmQ[3] = 49.03339;
                 rightArmQ[4] = -38.91037;
                 rightArmQ[5] = 25.219683;
-                rightArmQ[6] = 0;
+                rightArmQ[6] = 1200;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
@@ -244,7 +244,7 @@ void WtrArms::run()
                 rightArmQ[3] = 71.968369;
                 rightArmQ[4] = -38.99826;
                 rightArmQ[5] = 53.427063;
-                rightArmQ[6] = 0;
+                rightArmQ[6] = 1200;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
@@ -266,7 +266,7 @@ void WtrArms::run()
                 rightArmQ[3] = 71.968369;
                 rightArmQ[4] = -38.91037;
                 rightArmQ[5] = 45.782074;
-                rightArmQ[6] = 0;
+                rightArmQ[6] = 1200;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
@@ -288,7 +288,7 @@ void WtrArms::run()
                 rightArmQ[3] = 71.968369;
                 rightArmQ[4] = -38.91037;
                 rightArmQ[5] = 38.927944;
-                rightArmQ[6] = 0;
+                rightArmQ[6] = 1200;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
@@ -310,7 +310,7 @@ void WtrArms::run()
                 rightArmQ[3] = 71.616875;
                 rightArmQ[4] = -38.82251;
                 rightArmQ[5] = 28.20738;
-                rightArmQ[6] = 0;
+                rightArmQ[6] = 1200;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
@@ -332,7 +332,7 @@ void WtrArms::run()
                 rightArmQ[3] = 71.616875;
                 rightArmQ[4] = -38.82251;
                 rightArmQ[5] = 28.20738;
-                rightArmQ[6] = 1;
+                rightArmQ[6] = -1200;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
@@ -362,7 +362,7 @@ void WtrArms::run()
                 rightArmQ[3] = 35.413006;
                 rightArmQ[4] = -70.808441;
                 rightArmQ[5] = 3.163445;
-                rightArmQ[6] = 0;
+                rightArmQ[6] = -1200;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
@@ -386,7 +386,29 @@ void WtrArms::run()
                 rightArmQ[3] = 35.413006;
                 rightArmQ[4] = -70.808441;
                 rightArmQ[5] = 3.163445;
-                rightArmQ[6] = 0;
+                rightArmQ[6] = 1200;
+                movingArmJoints(leftArmQ,rightArmQ);
+                }
+
+    // Relax right hand
+
+                {
+                std::vector<double> leftArmQ(7,0.0);
+                std::vector<double> rightArmQ(7,0.0);
+                leftArmQ[0] = -20;
+                leftArmQ[1] = -10;
+                leftArmQ[2] = 0;
+                leftArmQ[3] = -60;
+                leftArmQ[4] = 10;
+                leftArmQ[5] = -10;
+
+                rightArmQ[0] = 66.080841;
+                rightArmQ[1] = 5.975395;
+                rightArmQ[2] = -26.871704;
+                rightArmQ[3] = 35.413006;
+                rightArmQ[4] = -70.808441;
+                rightArmQ[5] = 3.163445;
+                rightArmQ[6] = 1200;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
