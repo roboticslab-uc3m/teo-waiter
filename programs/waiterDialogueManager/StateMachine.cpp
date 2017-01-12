@@ -139,10 +139,10 @@ bool StateMachine::setLanguage(std::string language)
     else if("spanish" == language)    {
 
         //-- frases de reconociomiento
-        hiTeo = std::string ("hi teo");            //state 2
-        goOnTeo = std::string ("thank you");      //state 3
-        waterPlease = std::string ("give me water");   //state 4
-        stopTEO = std::string ("stop teo");        //state 5
+        hiTeo = std::string ("hola teo");            //state 2
+        goOnTeo = std::string ("gracias");      //state 3
+        waterPlease = std::string ("dame agua");   //state 4
+        stopTEO = std::string ("para por favor");        //state 5
 
         return true;
     }
