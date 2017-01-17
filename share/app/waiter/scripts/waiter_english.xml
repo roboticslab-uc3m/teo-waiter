@@ -5,29 +5,29 @@
 <name>waiter_english_App</name>
 
     <module>
-        <name>waiterDialogueManager</name>
+        <name>wtrDialogue</name>
         <parameters>--language spanish</parameters>
         <node>localhost</node>
     </module>
 
 
     <module>
-        <name>waiterExecHead</name>
+        <name>wtrHead</name>
         <node>/manipulation</node>
     </module>
     <connection>
-        <from>/waiterDialMan/Head/command:o</from>
-        <to>/waiterExecHead/DialogueManager/command:i</to>
+        <from>/wtrDialogue/command:o</from>
+        <to>/wtrHead/dialogue/command:i</to>
     </connection>
     
 
     <module>
-        <name>waiterExecManip</name>
+        <name>wtrArms</name>
         <node>/manipulation</node>
     </module>
     <connection>
-        <from>/waiterDialMan/Manip/command:o</from>
-        <to>/waiterExecManip/DialogueManager/command:i</to>
+        <from>/wtrDialogue/command:o</from>
+        <to>/wtrArms/dialogue/command:i</to>
     </connection>
 
 
@@ -38,11 +38,11 @@
     </module>
     <connection>
         <from>/cvBottle/state:o</from>
-        <to>/waiterExecHead/cvBottle/state:i</to>
+        <to>/wtrHead/cvBottle/state:i</to>
     </connection>
     <connection>
         <from>/cvBottle/state:o</from>
-        <to>/waiterExecManip/cvBottle/state:i</to>
+        <to>/wtrArms/cvBottle/state:i</to>
     </connection>    
 
 
@@ -59,11 +59,11 @@
 
     <connection>
         <from>/speechRecognition:o</from>
-        <to>/waiterDialMan/speechRecognition:i</to>
+        <to>/wtrDialogue/speechRecognition:i</to>
     </connection>
 
     <connection>
-        <from>/waiterDialMan/tts/rpc:c</from>
+        <from>/wtrDialogue/tts/rpc:c</from>
         <to>/tts/rpc:s</to>
     </connection>
 
