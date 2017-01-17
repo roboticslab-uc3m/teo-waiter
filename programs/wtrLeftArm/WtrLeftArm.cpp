@@ -1,17 +1,17 @@
 // -*- mode:C++; tab-width:4; c-basic-offset:4; indent-tabs-mode:nil -*-
 
-#include "WaiterExecManip.hpp"
+#include "WtrLeftArm.hpp"
 
 namespace teo
 {
 
 /************************************************************************/
 
-bool WaiterExecManip::configure(ResourceFinder &rf) {
+bool WtrLeftArm::configure(ResourceFinder &rf) {
 
     printf("--------------------------------------------------------------\n");
     if (rf.check("help")) {
-        printf("WaiterExecManip options:\n");
+        printf("WtrLeftArm options:\n");
         printf("\t--help (this help)\t--from [file.ini]\t--context [path]\n");
         //printf("\t--file (default: \"%s\")\n",fileName.c_str());
     }
@@ -24,7 +24,7 @@ bool WaiterExecManip::configure(ResourceFinder &rf) {
     //
     Property leftArmOptions;
     leftArmOptions.put("device","remote_controlboard");
-    leftArmOptions.put("local","/waiterExecManip/teo/leftArm");
+    leftArmOptions.put("local","/waiterLeftArm/teo/leftArm");
     leftArmOptions.put("remote","/teo/leftArm");
     leftArmDevice.open(leftArmOptions);
     if( ! leftArmDevice.isValid() ) {
@@ -41,27 +41,27 @@ bool WaiterExecManip::configure(ResourceFinder &rf) {
     inSrPort.setInCvPortPtr(&inCvPort);
     inCvPort.useCallback();
     inSrPort.useCallback();
-    inSrPort.open("/waiterExecManip/DialogueManager/command:i");
-    inCvPort.open("/waiterExecManip/cvBottle/state:i");
+    inSrPort.open("/waiterLeftArm/DialogueManager/command:i");
+    inCvPort.open("/waiterLeftArm/cvBottle/state:i");
 
     return true;
 }
 
 /************************************************************************/
-double WaiterExecManip::getPeriod() {
+double WtrLeftArm::getPeriod() {
     return 2.0;  // Fixed, in seconds, the slow thread that calls updateModule below
 }
 
 /************************************************************************/
-bool WaiterExecManip::updateModule() {
+bool WtrLeftArm::updateModule() {
     //printf("StateMachine in state [%d]. FollowMeExecutionCore alive...\n", stateMachine.getMachineState());
     return true;
 }
 
 /************************************************************************/
 
-bool WaiterExecManip::interruptModule() {
-    printf("WaiterExecManip closing...\n");
+bool WtrLeftArm::interruptModule() {
+    printf("wtrLeftArm closing...\n");
     inCvPort.disableCallback();
     inSrPort.disableCallback();
     inCvPort.interrupt();

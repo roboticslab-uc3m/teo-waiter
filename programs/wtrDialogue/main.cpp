@@ -3,11 +3,11 @@
 /**
  * 
  * @ingroup waiter_programs
- * \defgroup waiterDialogueManager WaiterDialogueManager
+ * \defgroup WtrDialogue WtrDialogue
  *
- * @brief Creates an instance of teo::WaiterDialogueManager.
+ * @brief Creates an instance of teo::WtrDialogue.
  *
- * @section waiterDialogueManager_legal Legal
+ * @section WtrDialogue_legal Legal
  *
  * Copyright: 2016 (C) Universidad Carlos III de Madrid
  *
@@ -18,22 +18,22 @@
  *
  * <hr>
  *
- * This file can be edited at WaiterDialogueManager
+ * This file can be edited at WtrDialogue
  *
  */
 
-#include "WaiterDialogueManager.hpp"
+#include "WtrDialogue.hpp"
 
 
 int main(int argc, char **argv) {
 
     yarp::os::ResourceFinder rf;
     rf.setVerbose(true);
-    rf.setDefaultContext("waiterDialogueManager");
-    rf.setDefaultConfigFile("waiterDialogueManager.ini");
+    rf.setDefaultContext("wtrDialogue");
+    rf.setDefaultConfigFile("wtrDialogue.ini");
     rf.configure(argc, argv);
 
-    teo::WaiterDialogueManager mod;
+    teo::WtrDialogue mod;
     if(rf.check("help")) {
         return mod.runModule(rf);
     }

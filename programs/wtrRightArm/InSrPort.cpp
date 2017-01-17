@@ -15,15 +15,19 @@ void InSrPort::onRead(Bottle& b) {
             break;
         case VOCAB_GO_TEO:
             printf("go teo\n");
-            inCvPortPtr->setFollow(2);
+            inCvPortPtr->setFollow(1);
             break;
         case VOCAB_WATER_PLEASE:
+            printf("water please\n");
+            inCvPortPtr->setFollow(2);
+            break;
+        case VOCAB_SECOND_MOVEMENT:
             printf("water please\n");
             inCvPortPtr->setFollow(3);
             break;
         case VOCAB_STOP_TEO:
             printf("stop teo\n");
-            inCvPortPtr->setFollow(4);
+            inCvPortPtr->setFollow(1);
             break;
         default:
             break;

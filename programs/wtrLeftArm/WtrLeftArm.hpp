@@ -1,7 +1,7 @@
 // -*- mode:C++; tab-width:4; c-basic-offset:4; indent-tabs-mode:nil -*-
 
-#ifndef __WAITER_EXEC_HEAD_HPP__
-#define __WAITER_EXEC_HEAD_HPP__
+#ifndef __FM_WAITER_LEFT_ARM_HPP__
+#define __FM_WAITER_LEFT_ARM_HPP__
 
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
@@ -18,30 +18,29 @@
 #define VOCAB_HELLO_TEO VOCAB4('e','l','o','t')
 #define VOCAB_GO_TEO VOCAB4('g','t','e','o')
 #define VOCAB_WATER_PLEASE VOCAB4('w','p','l','e')
+#define VOCAB_SECOND_MOVEMENT VOCAB4('s','c','m','m')
 #define VOCAB_STOP_TEO VOCAB4('s','t','e','o')
 
 using namespace yarp::os;
-using namespace yarp::dev;
 
 namespace teo
 {
 
 /**
- * @ingroup WaiterExecHead
+ * @ingroup WtrLeftArm
  *
- * @brief Waiter Exec Head.
+ * @brief Waiter Left Arm.
  *
  */
-class WaiterExecHead : public RFModule {
+class WtrLeftArm : public RFModule {
     public:
         bool configure(ResourceFinder &rf);
 
     protected:
         InSrPort inSrPort;
         InCvPort inCvPort;
-        yarp::dev::PolyDriver headDevice;
+        yarp::dev::PolyDriver leftArmDevice;
         yarp::dev::IPositionControl *iPositionControl;
-        yarp::dev::IVelocityControl *iVelocityControl;
 
         bool interruptModule();
         double getPeriod();
@@ -51,4 +50,4 @@ class WaiterExecHead : public RFModule {
 
 }  // namespace teo
 
-#endif  // __WAITER_EXEC_HEAD_HPP__
+#endif  // __FM_WAITER_LEFT_ARM_HPP__

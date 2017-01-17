@@ -1,13 +1,14 @@
 // -*- mode:C++; tab-width:4; c-basic-offset:4; indent-tabs-mode:nil -*-
 
-#ifndef __IN_SR_PORT_HPP__
-#define __IN_SR_PORT_HPP__
+#ifndef __FM_WAITER_RIGHT_ARM_HPP__
+#define __FM_WAITER_RIGHT_ARM_HPP__
 
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
 #include <stdlib.h>
 
 #include "InCvPort.hpp"
+#include "InSrPort.hpp"
 
 //instrucciones para el followme
 #define VOCAB_FOLLOW_ME VOCAB4('f','o','l','l')
@@ -17,6 +18,7 @@
 #define VOCAB_HELLO_TEO VOCAB4('e','l','o','t')
 #define VOCAB_GO_TEO VOCAB4('g','t','e','o')
 #define VOCAB_WATER_PLEASE VOCAB4('w','p','l','e')
+#define VOCAB_SECOND_MOVEMENT VOCAB4('s','c','m','m')
 #define VOCAB_STOP_TEO VOCAB4('s','t','e','o')
 
 using namespace yarp::os;
@@ -25,24 +27,27 @@ namespace teo
 {
 
 /**
- * @ingroup WaiterExecutionCore
+ * @ingroup WtrRightArm
  *
- * @brief Input port of speech recognition data.
+ * @brief Waiter Right Arm.
  *
  */
-class InSrPort : public BufferedPort<Bottle> {
+class WtrRightArm : public RFModule {
     public:
-        void setInCvPortPtr(InCvPort *inCvPortPtr) {
-            this->inCvPortPtr = inCvPortPtr;
-        }
+        bool configure(ResourceFinder &rf);
 
     protected:
-        /** Callback on incoming Bottle. **/
-        virtual void onRead(Bottle& b);
+        InSrPort inSrPort;
+        InCvPort inCvPort;
+        yarp::dev::PolyDriver rightArmDevice;
+        yarp::dev::IPositionControl *iPositionControl;
 
-        InCvPort* inCvPortPtr;
+        bool interruptModule();
+        double getPeriod();
+        bool updateModule();
+
 };
 
 }  // namespace teo
 
-#endif  // __IN_SR_PORT_HPP__
+#endif  // __FM_WAITER_RIGHT_ARM_HPP__

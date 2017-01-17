@@ -17,6 +17,7 @@
 #define VOCAB_HELLO_TEO VOCAB4('e','l','o','t')
 #define VOCAB_GO_TEO VOCAB4('g','t','e','o')
 #define VOCAB_WATER_PLEASE VOCAB4('w','p','l','e')
+#define VOCAB_SECOND_MOVEMENT VOCAB4('s','c','m','m')
 #define VOCAB_STOP_TEO VOCAB4('s','t','e','o')
 
 using namespace yarp::os;

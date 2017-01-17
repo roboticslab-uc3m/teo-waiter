@@ -15,15 +15,17 @@
 #define VOCAB_HELLO_TEO VOCAB4('e','l','o','t')
 #define VOCAB_GO_TEO VOCAB4('g','t','e','o')
 #define VOCAB_WATER_PLEASE VOCAB4('w','p','l','e')
+#define VOCAB_SECOND_MOVEMENT VOCAB4('s','c','m','m')
 #define VOCAB_STOP_TEO VOCAB4('s','t','e','o')
 
 using namespace yarp::os;
+using namespace yarp::dev;
 
 namespace teo
 {
 
 /**
- * @ingroup followMeExecutionCore
+ * @ingroup WaiterExecutionCore
  *
  * @brief Input port of computer vision data.
  *
@@ -31,20 +33,25 @@ namespace teo
 class InCvPort : public BufferedPort<Bottle> {
     public:
 
-        InCvPort(): follow(0) {}
+        InCvPort(): follow(false) {}
 
         void setIPositionControl(yarp::dev::IPositionControl *iPositionControl) {
-            this->iPositionControl = iPositionControl;
+            this->iPositionControl = iPositionControl; 
         }
 
-        void setFollow(int value);
+        void setIVelocityControl(yarp::dev::IVelocityControl *iVelocityControl) {
+            this->iVelocityControl = iVelocityControl;
+        }
+
+        void setFollow(bool value);
 
 protected:
-        int follow;
+        bool follow;
 
         /** Callback on incoming Bottle. **/
         virtual void onRead(Bottle& b);
 
+        yarp::dev::IVelocityControl *iVelocityControl;
         yarp::dev::IPositionControl *iPositionControl;
 };
 

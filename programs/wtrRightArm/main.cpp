@@ -2,29 +2,29 @@
 
 /**
  *
- * @ingroup teo_body_programs
- * \defgroup waiterExecHead waiterExecHead
+ * @ingroup wtrRightArm_programs
+ * \defgroup wtrRightArm wtrLeftArm
  *
- * @brief Creates an instance of teo::waiterExecHead.
+ * @brief Creates an instance of teo::WtrLeftArm.
  *
- * @section waiterExecHead_legal Legal
+ * @section wtrRightArm_legal Legal
  *
- * Copyright: 2015 (C) Universidad Carlos III de Madrid
+ * Copyright: 2016 (C) Universidad Carlos III de Madrid
  *
- * Author: Juan Miguel Garcia
+ * Author:Juan Miguel Garcia 2016
  *
  * CopyPolicy: This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License 3.0 or later
  *
  * <hr>
  *
- * This file can be edited at waiterExecHead
+ * This file can be edited at wtrRightArm
  *
  */
 
 #include <yarp/os/all.h>
 
-#include "WaiterExecHead.hpp"
+#include "WtrRightArm.hpp"
 
 using namespace yarp::os;
 
@@ -32,11 +32,11 @@ int main(int argc, char **argv) {
 
     ResourceFinder rf;
     rf.setVerbose(true);
-    rf.setDefaultContext("waiterExecHead");
-    rf.setDefaultConfigFile("waiterExecHead.ini");
+    rf.setDefaultContext("wtrRightArm");
+    rf.setDefaultConfigFile("wtrRightArm.ini");
     rf.configure(argc, argv);
 
-    teo::WaiterExecHead mod;
+    teo::WtrRightArm mod;
     if(rf.check("help")) {
         return mod.runModule(rf);
     }
