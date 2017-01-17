@@ -4,7 +4,6 @@
 add_subdirectory(wtrArms)
 add_subdirectory(wtrDialogue)
 add_subdirectory(wtrHead)
-add_subdirectory(wtrLeftArm)
-add_subdirectory(wtrRightArm)
+
 
 

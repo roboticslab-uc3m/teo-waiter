@@ -21,8 +21,7 @@ project(WAITER)
 option(ENABLE_wtrArms "Choose if you want to compile wtrArms" TRUE)
 option(ENABLE_wtrDialogue "Choose if you want to compile wtrDialogue" TRUE)
 option(ENABLE_wtrHead "Choose if you want to compile wtrHead" TRUE)
-option(ENABLE_wtrLeftArm "Choose if you want to compile wtrLeftArm" TRUE)
-option(ENABLE_wtrRightArm "Choose if you want to compile wtrRightArm" TRUE)
+
 
 ### options: force default
 #option(ENABLE_exampleExtraOption "Enable/disable option exampleExtraOption" TRUE)

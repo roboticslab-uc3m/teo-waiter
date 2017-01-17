@@ -40,10 +40,6 @@
         <from>/cvBottle/state:o</from>
         <to>/wtrHead/cvBottle/state:i</to>
     </connection>
-    <connection>
-        <from>/cvBottle/state:o</from>
-        <to>/wtrArms/cvBottle/state:i</to>
-    </connection>    
 
 
     <module>
