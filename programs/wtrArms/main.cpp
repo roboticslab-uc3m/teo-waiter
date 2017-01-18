@@ -2,41 +2,37 @@
 
 /**
  *
- * @ingroup teo_body_programs
- * \defgroup waiterExecHead waiterExecHead
+ * @ingroup waiter_programs
+ * \defgroup wtrArms wtrArms
  *
- * @brief Creates an instance of teo::waiterExecHead.
+ * @brief Creates an instance of teo::wtrArms.
  *
- * @section waiterExecHead_legal Legal
+ * @section wtrArms_legal Legal
  *
- * Copyright: 2015 (C) Universidad Carlos III de Madrid
+ * Copyright: 2016 (C) Universidad Carlos III de Madrid
  *
- * Author: Juan Miguel Garcia
+ * Author: Juan Miguel Garcia 
  *
  * CopyPolicy: This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License 3.0 or later
  *
  * <hr>
  *
- * This file can be edited at waiterExecHead
+ * This file can be edited at wtrArms
  *
  */
 
-#include <yarp/os/all.h>
-
-#include "WaiterExecHead.hpp"
-
-using namespace yarp::os;
+#include "WtrArms.hpp"
 
 int main(int argc, char **argv) {
 
-    ResourceFinder rf;
+    yarp::os::ResourceFinder rf;
     rf.setVerbose(true);
-    rf.setDefaultContext("waiterExecHead");
-    rf.setDefaultConfigFile("waiterExecHead.ini");
+    rf.setDefaultContext("wtrArms");
+    rf.setDefaultConfigFile("wtrArms.ini");
     rf.configure(argc, argv);
 
-    teo::WaiterExecHead mod;
+    teo::WtrArms mod;
     if(rf.check("help")) {
         return mod.runModule(rf);
     }
@@ -44,7 +40,7 @@ int main(int argc, char **argv) {
     printf("Run \"%s --help\" for options.\n",argv[0]);
     printf("%s checking for yarp network... ",argv[0]);
     fflush(stdout);
-    Network yarp;
+    yarp::os::Network yarp;
     if (!yarp.checkNetwork()) {
         fprintf(stderr,"[fail]\n%s found no yarp network (try running \"yarpserver &\"), bye!\n",argv[0]);
         return 1;
@@ -52,4 +48,3 @@ int main(int argc, char **argv) {
 
     return mod.runModule(rf);
 }
-

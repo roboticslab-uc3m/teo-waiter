@@ -1,6 +1,6 @@
 // -*- mode:C++; tab-width:4; c-basic-offset:4; indent-tabs-mode:nil -*-
 
-#include "WaiterExecHead.hpp"
+#include "WtrHead.hpp"
 #include "InCvPort.hpp"
 
 namespace teo
@@ -8,13 +8,13 @@ namespace teo
 
 /************************************************************************/
 
-bool WaiterExecHead::configure(ResourceFinder &rf) {
+bool WtrHead::configure(ResourceFinder &rf) {
 
     //ConstString fileName(DEFAULT_FILE_NAME);
     
     printf("--------------------------------------------------------------\n");
     if (rf.check("help")) {
-        printf("WaiterExecHead options:\n");
+        printf("WtrHead options:\n");
         printf("\t--help (this help)\t--from [file.ini]\t--context [path]\n");
         //printf("\t--file (default: \"%s\")\n",fileName.c_str());
     }
@@ -29,7 +29,7 @@ bool WaiterExecHead::configure(ResourceFinder &rf) {
     //
     Property headOptions;
     headOptions.put("device","remote_controlboard");
-    headOptions.put("local","/waiterExecHead/head");
+    headOptions.put("local","/waiterHead/head");
     headOptions.put("remote","/teo/head");
     headDevice.open(headOptions);
     if( ! headDevice.isValid() ) {
@@ -48,27 +48,27 @@ bool WaiterExecHead::configure(ResourceFinder &rf) {
     inSrPort.setInCvPortPtr(&inCvPort);
     inCvPort.useCallback();
     inSrPort.useCallback();
-    inSrPort.open("/waiterExecHead/DialogueManager/command:i");
-    inCvPort.open("/waiterExecHead/cvBottle/state:i");
+    inSrPort.open("/wtrHead/dialogue/command:i");
+    inCvPort.open("/wtrHead/cvBottle/state:i");
 
     return true;
 }
 
 /************************************************************************/
-double WaiterExecHead::getPeriod() {
+double WtrHead::getPeriod() {
     return 2.0;  // Fixed, in seconds, the slow thread that calls updateModule below
 }
 
 /************************************************************************/
-bool WaiterExecHead::updateModule() {
+bool WtrHead::updateModule() {
     //printf("StateMachine in state [%d]. WaiterExecHead alive...\n", stateMachine.getMachineState());
     return true;
 }
 
 /************************************************************************/
 
-bool WaiterExecHead::interruptModule() {
-    printf("WaiterExecHead closing...\n");
+bool WtrHead::interruptModule() {
+    printf("WtrHead closing...\n");
     inCvPort.disableCallback();
     inSrPort.disableCallback();
     inCvPort.interrupt();

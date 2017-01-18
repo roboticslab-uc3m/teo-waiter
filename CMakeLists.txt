@@ -17,11 +17,11 @@ project(WAITER)
 ### options: cpp libraries
 #option(ENABLE_ExampleLibrary "Choose if you want to compile ExampleLibrary" TRUE)
 
-### options: cpp programs
-option(ENABLE_waiterArmMov "Choose if you want to compile waiterArmMov" TRUE)
-option(ENABLE_waiterDialogueManager "Choose if you want to compile waiterDialogueManager" TRUE)
-option(ENABLE_waiterExecHead "Choose if you want to compile waiterExecHead" TRUE)
-option(ENABLE_waiterExecManip "Choose if you want to compile waiterExecManip" TRUE)
+### options: cpp programs 
+option(ENABLE_wtrArms "Choose if you want to compile wtrArms" TRUE)
+option(ENABLE_wtrDialogue "Choose if you want to compile wtrDialogue" TRUE)
+option(ENABLE_wtrHead "Choose if you want to compile wtrHead" TRUE)
+
 
 ### options: force default
 #option(ENABLE_exampleExtraOption "Enable/disable option exampleExtraOption" TRUE)
