@@ -184,9 +184,9 @@ void WtrArms::run()
 
                 if (a==1 && state) {
                     printf("begin MOVE TO Pb POSITION\n");
-                    double Pb[7] = {-20, 30, 0, -80, -30, 10, 0};
+                    double Pb[7] = {10, 30, 0, -95, -30, -5, 0};
                     leftArmIPositionControl->positionMove(Pb);
-                    yarp::os::Time::delay(4);
+                    yarp::os::Time::delay(3);
                     a=2;
                 } // MOVIMIENTO NUMERO 2
 
