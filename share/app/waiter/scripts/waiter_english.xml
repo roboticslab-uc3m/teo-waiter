@@ -5,7 +5,7 @@
 <name>waiter_english_App</name>
 
     <module>
-        <name>waiterDialogueManager</name>
+        <name>wtrDialogue</name>
         <parameters>--language english</parameters>
         <node>localhost</node>
     </module>
