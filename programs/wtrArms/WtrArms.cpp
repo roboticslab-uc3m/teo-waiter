@@ -102,10 +102,19 @@ bool WtrArms::movingArmJoints(std::vector<double>& leftArmQ, std::vector<double>
     leftArmIPositionControl->positionMove( leftArmQ.data() );
     //printf("Waiting for right arm.");
 
-    bool done = false; // checking the position move
-    while((!done)&&(!Thread::isStopping()))
+    bool doneR = false; // checking the position move
+    while((!doneR)&&(!Thread::isStopping()))
     {
-        rightArmIPositionControl->checkMotionDone(&done);
+        rightArmIPositionControl->checkMotionDone(&doneR);
+        //printf(".");
+        //fflush(stdout);
+        yarp::os::Time::delay(0.1);
+    }
+
+    bool doneL = false; // checking the position move
+    while((!doneL)&&(!Thread::isStopping()))
+    {
+        leftArmIPositionControl->checkMotionDone(&doneL);
         //printf(".");
         //fflush(stdout);
         yarp::os::Time::delay(0.1);
@@ -169,7 +178,7 @@ void WtrArms::run()
                     printf("begin MOVE TO Pa POSITION\n");
                     double Pa[7] = {-30, 40, 0, -70, -40, 10, 0};
                     leftArmIPositionControl->positionMove(Pa);
-                    yarp::os::Time::delay(3);
+                    yarp::os::Time::delay(4);
                     a=1;
                 } // MOVIMIENTO NUMERO 1
 
@@ -177,7 +186,7 @@ void WtrArms::run()
                     printf("begin MOVE TO Pb POSITION\n");
                     double Pb[7] = {-20, 30, 0, -80, -30, 10, 0};
                     leftArmIPositionControl->positionMove(Pb);
-                    yarp::os::Time::delay(3);
+                    yarp::os::Time::delay(4);
                     a=2;
                 } // MOVIMIENTO NUMERO 2
 
@@ -185,7 +194,7 @@ void WtrArms::run()
                     printf("begin MOVE TO Pc POSITION\n");
                     double Pc[7] = {-30, -10, 0, -70, 10, 10, 0};
                     leftArmIPositionControl->positionMove(Pc);
-                    yarp::os::Time::delay(3);
+                    yarp::os::Time::delay(4);
                     a=0;
                 } // MOVIMIENTO NUMERO 3
 
