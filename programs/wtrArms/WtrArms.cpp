@@ -153,28 +153,15 @@ void WtrArms::run()
         switch ( state )    {
             case VOCAB_HELLO_TEO: {//VOCAB_HELLO_TEO
 
-                printf("Presalute (Security position) \n");
-                {
-                std::vector<double> leftArmQ(7,0.0);
-                std::vector<double> rightArmQ(7,0.0);
-                leftArmQ[0] = -10;
-                leftArmQ[1] = 5;
-                leftArmQ[2] = 0;
-                leftArmQ[3] = 0;
-                leftArmQ[4] = 0;
-                leftArmQ[5] = 0;
-                movingArmJoints(leftArmQ,rightArmQ);
-                }
-
                 printf("Salute\n");
                 {
                 std::vector<double> leftArmQ(7,0.0);
                 std::vector<double> rightArmQ(7,0.0);
                 leftArmQ[0] = -20;
-                leftArmQ[1] = -10;
+                leftArmQ[1] = 0;
                 leftArmQ[2] = 0;
                 leftArmQ[3] = -60;
-                leftArmQ[4] = 10;
+                leftArmQ[4] = 0;
                 leftArmQ[5] = -10;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
