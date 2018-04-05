@@ -12,8 +12,8 @@ void InCvPort::onRead(Bottle& b) {
     //-------------------POSITION CONTROL MODE FOR HEAD--------------------
 
     if ( ! follow ){
-    iPositionControl->positionMove(0, 0.0);
-    iPositionControl->positionMove(1, 0.0);
+    headIPositionControl2->positionMove(0, 0.0);
+    headIPositionControl2->positionMove(1, 0.0);
     return;
     }
     if (b.size() < 3) return;
@@ -24,15 +24,14 @@ void InCvPort::onRead(Bottle& b) {
 
     printf("%f %f %f\n",x,y,z);
 
-    if( x > 325 ) iPositionControl->relativeMove(0, -1);
-    if( x < 315 ) iPositionControl->relativeMove(0, 1);
+    if( x > 325 ) headIPositionControl2->relativeMove(0, -1);
+    if( x < 315 ) headIPositionControl2->relativeMove(0, 1);
     //
-    if( y > 145 ) iPositionControl->relativeMove(1, 1);
-    if( y < 135 ) iPositionControl->relativeMove(1, -1);
+    if( y > 145 ) headIPositionControl2->relativeMove(1, 1);
+    if( y < 135 ) headIPositionControl2->relativeMove(1, -1);
 
     /*
-    //-------------------VELOCITY CONTROL MODE FOR HEAD--------------------
-
+    //------VELOCITY CONTROL MODE FOR HEAD------// no borrar
     if ( ! follow ){
 	iVelocityControl->velocityMove(0, 0.0);
 	iVelocityControl->velocityMove(1, 0.0); 

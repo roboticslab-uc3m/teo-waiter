@@ -51,8 +51,11 @@ protected:
         /** Callback on incoming Bottle. **/
         virtual void onRead(Bottle& b);
 
-        yarp::dev::IVelocityControl *iVelocityControl;
-        yarp::dev::IPositionControl *iPositionControl;
+        /** Head PositionControl2 Interface */
+        yarp::dev::IPositionControl2 *headIPositionControl2;
+        /** Head VelocityControl2 Interface */
+        yarp::dev::IVelocityControl2 *headIVelocityControl2;
+
 };
 
 }  // namespace teo
