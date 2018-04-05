@@ -25,10 +25,11 @@ bool WtrDialogue::configure(yarp::os::ResourceFinder &rf) {
     }
 
     //-----------------OPEN LOCAL PORTS------------//
-    outCmdPortHead.open("/wtrDialogue/command:o");
-    outTtsPort.open("/wtrDialogue/tts/rpc:c");
-    outRecognitionPort.open("/wtrDialogue/setDictionary/rpc:c"); // -- setDictionary (client)
-    inSrPort.open("/wtrDialogue/speechRecognition:i"); // -- words (input)
+    outCmdPortHead.open("/wtrDialogue/move/rpc:c"); // -- head movements (output)
+    outTtsPort.open("/wtrDialogue/tts/rpc:c");      // -- talking (output)
+    outRecognitionPort.open("/wtrDialogue/setDictionary/rpc:c");    // -- setDictionary (client)
+    inSrPort.open("/wtrDialogue/speRecog/speech:i");                // -- words (input)
+
     stateMachine.setOutCmdPortHead(&outCmdPortHead);
     stateMachine.setOutCmdPortManip(&outCmdPortManip);
     stateMachine.setOutTtsPort(&outTtsPort);
