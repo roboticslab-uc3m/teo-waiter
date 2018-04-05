@@ -45,7 +45,7 @@ class WtrHead : public RFModule {
         /** RFModule updateModule. */
         virtual bool updateModule();
 
-        InSrPort inDmPort;
+        InSrPort inDiaPort;
         InCvPort inCvPort;
 
         /** Head Device */

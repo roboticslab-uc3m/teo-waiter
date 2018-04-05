@@ -55,10 +55,10 @@ bool WtrHead::configure(ResourceFinder &rf) {
     //iPositionControl->setPositionMode();
 
     //-----------------OPEN LOCAL PORTS------------//
-    inDmPort.setInCvPortPtr(&inCvPort);
+    inDiaPort.setInCvPortPtr(&inCvPort);
     inCvPort.useCallback();
-    inDmPort.useCallback();
-    inDmPort.open("/wtrHead/dialogue/rpc:s");
+    inDiaPort.useCallback();
+    inDiaPort.open("/wtrHead/dialogue/rpc:s");
     inCvPort.open("/wtrHead/cvBottle/state:i");
 
     return true;
@@ -80,11 +80,11 @@ bool WtrHead::updateModule() {
 bool WtrHead::interruptModule() {
     printf("WtrHead closing...\n");
     inCvPort.disableCallback();
-    inDmPort.disableCallback();
+    inDiaPort.disableCallback();
     inCvPort.interrupt();
-    inDmPort.interrupt();
+    inDiaPort.interrupt();
     inCvPort.close();
-    inDmPort.close();
+    inDiaPort.close();
     return true;
 }
 
