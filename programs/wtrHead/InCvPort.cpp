@@ -30,8 +30,7 @@ void InCvPort::onRead(Bottle& b) {
     if( y > 145 ) headIPositionControl2->relativeMove(1, 1);
     if( y < 135 ) headIPositionControl2->relativeMove(1, -1);
 
-    /*
-    //------VELOCITY CONTROL MODE FOR HEAD------// no borrar
+    /*//------VELOCITY CONTROL MODE FOR HEAD------// no borrar
     if ( ! follow ){
 	iVelocityControl->velocityMove(0, 0.0);
 	iVelocityControl->velocityMove(1, 0.0); 

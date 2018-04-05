@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 #include "InCvPort.hpp"
-#include "InSrPort.hpp"
+#include "InDiaPort.hpp"
 
 //instrucciones para el followme
 #define VOCAB_FOLLOW_ME VOCAB4('f','o','l','l')
@@ -48,6 +48,7 @@ class WtrHead : public RFModule {
         /** Input port from dialogue manager */
         yarp::os::RpcServer inDiaPort;
 
+        InDiaPort inDiaPortProcessor;
         InCvPort inCvPort;
 
         /** Head Device */

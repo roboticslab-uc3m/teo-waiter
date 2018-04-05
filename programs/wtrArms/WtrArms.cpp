@@ -45,6 +45,7 @@ bool WtrArms::configure(yarp::os::ResourceFinder &rf)
     } else printf("[success] Acquired leftArmIControlMode2 interface\n");
 
     // ------ RIGHT ARM -------
+    yarp::os::Property rightArmOptions;
     rightArmOptions.put("device","remote_controlboard");
     rightArmOptions.put("remote",robot+"/rightArm");
     rightArmOptions.put("local",WtrArmsStr+robot+"/rightArm");
@@ -120,14 +121,14 @@ bool WtrArms::updateModule()
 
 bool WtrArms::movingArmJoints(std::vector<double>& leftArmQ, std::vector<double> &rightArmQ)
 {
-    rightArmIPositionControl->positionMove( rightArmQ.data() );
-    leftArmIPositionControl->positionMove( leftArmQ.data() );
+    rightArmIPositionControl2->positionMove( rightArmQ.data() );
+    leftArmIPositionControl2->positionMove( leftArmQ.data() );
 
     //printf("Waiting for right arm.");
     bool doneR = false; // checking the position move
     while((!doneR)&&(!Thread::isStopping()))
     {
-        rightArmIPositionControl->checkMotionDone(&doneR);
+        rightArmIPositionControl2->checkMotionDone(&doneR);
         yarp::os::Time::delay(0.1);
     }
 
@@ -135,7 +136,7 @@ bool WtrArms::movingArmJoints(std::vector<double>& leftArmQ, std::vector<double>
     bool doneL = false;
     while((!doneL)&&(!Thread::isStopping()))
     {
-        leftArmIPositionControl->checkMotionDone(&doneL);
+        leftArmIPositionControl2->checkMotionDone(&doneL);
         yarp::os::Time::delay(0.1);
     }
 
@@ -194,7 +195,7 @@ void WtrArms::run()
                 if (phase==0 && state) {
                     printf("begin MOVE TO Pa POSITION\n");
                     double Pa[7] = {-30, 40, 0, -70, -40, 10, 0};
-                    leftArmIPositionControl->positionMove(Pa);
+                    leftArmIPositionControl2->positionMove(Pa);
                     //yarp::os::Time::delay(4);
                     phase=1;
                 } // MOVIMIENTO NUMERO 1
@@ -202,7 +203,7 @@ void WtrArms::run()
                 if (phase==1 && state) {
                     printf("begin MOVE TO Pb POSITION\n");
                     double Pb[7] = {-20, 30, 0, -80, -30, 10, 0};
-                    leftArmIPositionControl->positionMove(Pb);
+                    leftArmIPositionControl2->positionMove(Pb);
                     //yarp::os::Time::delay(3);
                     phase=2;
                 } // MOVIMIENTO NUMERO 2
@@ -210,7 +211,7 @@ void WtrArms::run()
                 if (phase==2 && state) {
                     printf("begin MOVE TO Pc POSITION\n");
                     double Pc[7] = {-30, -10, 0, -70, 10, 10, 0};
-                    leftArmIPositionControl->positionMove(Pc);
+                    leftArmIPositionControl2->positionMove(Pc);
                     //yarp::os::Time::delay(4);
                     phase=0;
                 } // MOVIMIENTO NUMERO 3

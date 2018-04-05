@@ -35,12 +35,12 @@ class InCvPort : public BufferedPort<Bottle> {
 
         InCvPort(): follow(false) {}
 
-        void setIPositionControl(yarp::dev::IPositionControl *iPositionControl) {
-            this->iPositionControl = iPositionControl; 
+        void setIPositionControl(yarp::dev::IPositionControl2 *iPositionControl) {
+            this->headIPositionControl2 = iPositionControl;
         }
 
-        void setIVelocityControl(yarp::dev::IVelocityControl *iVelocityControl) {
-            this->iVelocityControl = iVelocityControl;
+        void setIVelocityControl(yarp::dev::IVelocityControl2 *iVelocityControl) {
+            this->headIVelocityControl2 = iVelocityControl;
         }
 
         void setFollow(bool value);
