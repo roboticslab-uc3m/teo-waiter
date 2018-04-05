@@ -45,7 +45,9 @@ class WtrHead : public RFModule {
         /** RFModule updateModule. */
         virtual bool updateModule();
 
-        InSrPort inDiaPort;
+        /** Input port from dialogue manager */
+        yarp::os::RpcServer inDiaPort;
+
         InCvPort inCvPort;
 
         /** Head Device */
