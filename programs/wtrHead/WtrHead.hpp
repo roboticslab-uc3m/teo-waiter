@@ -38,15 +38,22 @@ class WtrHead : public RFModule {
         bool configure(ResourceFinder &rf);
 
     protected:
-        InSrPort inSrPort;
-        InCvPort inCvPort;
-        yarp::dev::PolyDriver headDevice;
-        yarp::dev::IPositionControl *iPositionControl;
-        yarp::dev::IVelocityControl *iVelocityControl;
+        /** RFModule interruptModule. */
+        virtual bool interruptModule();
+        /** RFModule getPeriod. */
+        virtual double getPeriod();
+        /** RFModule updateModule. */
+        virtual bool updateModule();
 
-        bool interruptModule();
-        double getPeriod();
-        bool updateModule();
+        InSrPort inDmPort;
+        InCvPort inCvPort;
+
+        /** Head Device */
+        yarp::dev::PolyDriver headDevice;
+        /** Head ControlMode2 Interface */
+        yarp::dev::IControlMode2 *headIControlMode2;
+        /** Head PositionControl2 Interface */
+        yarp::dev::IPositionControl2 *headIPositionControl2;
 
 };
 
