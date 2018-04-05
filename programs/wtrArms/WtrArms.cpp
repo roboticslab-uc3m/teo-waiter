@@ -147,17 +147,11 @@ bool WtrArms::movingArmJoints(std::vector<double>& leftArmQ, std::vector<double>
 
 bool WtrArms::read(yarp::os::ConnectionReader& connection) // hay q arreglar
 {
-    yarp::os::Bottle b;
-    b.read(connection);
-    // process data in b
+    yarp::os::Bottle in;
+    in.read(connection);    // process data "in bottle in"
+    bool ok = in.read(connection);
+    if (!ok) return false;
     printf("[WtrArms] Got %s\n", b.toString().c_str());
-
-    /*if( (VOCAB_FOLLOW_ME ==b.get(0).asVocab()) || (VOCAB_STATE_SALUTE ==b.get(0).asVocab()) )
-    {
-     state = VOCAB_STATE_SALUTE;
-    }
-    else if (VOCAB_STOP_FOLLOWING ==b.get(0).asVocab())
-     state = VOCAB_STOP_FOLLOWING;*/
 
     state = b.get(0).asVocab();
 
