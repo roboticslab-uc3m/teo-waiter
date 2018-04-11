@@ -64,7 +64,6 @@ bool WtrDialogue::configure(yarp::os::ResourceFinder &rf) {
     outRecognitionPort.write(bRec);
 
     stateMachine.setLanguage(language);
-    stateMachine.setSpeakLanguage(language);
 
     stateMachine.start();
 
