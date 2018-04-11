@@ -6,7 +6,6 @@ namespace teo
 {
 
 /************************************************************************/
-
 bool WtrDialogue::configure(yarp::os::ResourceFinder &rf) {
 
     std::string language = rf.check("language",yarp::os::Value(DEFAULT_LANGUAGE),"language to be used").asString();
@@ -34,16 +33,16 @@ bool WtrDialogue::configure(yarp::os::ResourceFinder &rf) {
     stateMachine.setOutCmdPortManip(&outCmdPortManip);
     stateMachine.setOutTtsPort(&outTtsPort);
     stateMachine.setInSrPort(&inSrPort);
-    yarp::os::Network::connect("/wtrDialogue/setDictionary/rpc:c", "/speechRecognition/rpc:s");
 
+    yarp::os::Network::connect("/wtrDialogue/setDictionary/rpc:c", "/speechRecognition/rpc:s");
     while(1){
         if(outTtsPort.getOutputCount() > 0) break;
         printf("Waiting for '/wtrDialogue/tts/rpc:c' to be connected to something...\n");
         yarp::os::Time::delay(0.5);
     }
-    yarp::os::Bottle bOut,  bRec;
 
     //-----------------ACTIVE IDIOM FOR DICTIONARY------------//
+    yarp::os::Bottle bOut,  bRec;
     bOut.addString("setLanguage");
     bRec.addString("setDictionary");
     bRec.addString("waiter");
@@ -65,6 +64,8 @@ bool WtrDialogue::configure(yarp::os::ResourceFinder &rf) {
     outRecognitionPort.write(bRec);
 
     stateMachine.setLanguage(language);
+    stateMachine.setSpeakLanguage(language);
+
     stateMachine.start();
 
     return true;
@@ -82,7 +83,6 @@ bool WtrDialogue::updateModule() {
 }
 
 /************************************************************************/
-
 bool WtrDialogue::interruptModule() {
     printf("WtrDialogue closing...\n");
     inSrPort.interrupt();
