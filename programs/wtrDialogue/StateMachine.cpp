@@ -6,7 +6,6 @@ namespace teo
 {
 
 /************************************************************************/
-
 bool StateMachine::threadInit() {
     _machineState = 1;
     x = 1;
@@ -15,7 +14,6 @@ bool StateMachine::threadInit() {
 }
 
 /************************************************************************/
-
 void StateMachine::run() {
     while(!isStopping()) {
             if(_machineState==-1) {
@@ -80,7 +78,6 @@ void StateMachine::run() {
 }
 
 /************************************************************************/
-
 void StateMachine::ttsSay(const yarp::os::ConstString& sayConstString) {
     yarp::os::Bottle bOut, bRes;
     bOut.addString("say");
@@ -92,7 +89,6 @@ void StateMachine::ttsSay(const yarp::os::ConstString& sayConstString) {
 }
 
 /************************************************************************/
-
 yarp::os::ConstString StateMachine::asrListen() {
     yarp::os::Bottle* bIn = inSrPort->read(true);  // shouldWait
     printf("[StateMachine] Listened: %s\n", bIn->toString().c_str());
@@ -100,37 +96,31 @@ yarp::os::ConstString StateMachine::asrListen() {
 }
 
 /************************************************************************/
-
 int StateMachine::getMachineState() {
     return _machineState;
 }
 
 /************************************************************************/
-
 void StateMachine::setInSrPort(yarp::os::BufferedPort<yarp::os::Bottle>* inSrPort) {
     this->inSrPort = inSrPort;
 }
 
 /************************************************************************/
-
 void StateMachine::setOutCmdPortHead(yarp::os::Port* outCmdPort) {
     this->outCmdPortHead = outCmdPort;
 }
 
 /************************************************************************/
-
 void StateMachine::setOutCmdPortManip(yarp::os::Port* outCmdPort) {
     this->outCmdPortManip = outCmdPort;
 }
 
 /************************************************************************/
-
 void StateMachine::setOutTtsPort(yarp::os::RpcClient* outTtsPort) {
     this->outTtsPort = outTtsPort;
 }
 
 /************************************************************************/
-
 bool StateMachine::setLanguage(std::string language)
 {
     _language = language;
@@ -161,7 +151,6 @@ bool StateMachine::setLanguage(std::string language)
 }
 
 /************************************************************************/
-
 bool StateMachine::setSpeakLanguage(std::string language, int _machineState) {
 
     if("english" == language)    {
@@ -186,7 +175,7 @@ bool StateMachine::setSpeakLanguage(std::string language, int _machineState) {
         take1 = std::string("Por supuesto."); //state 4
         finish = std::string("Me parece bien. Nos vemos pronto."); //state 5
 
-        if (_machineState == 3)        {
+        if (_machineState == 3)        { // Combinancion de respuestas - estado 3
             switch (x) {
             case 1:
                 drink = std::string("Que quiere tomar. Mi especialidad es servir cervezas bien fresquitas pero estoy de servicio."); //state 3
@@ -205,18 +194,18 @@ bool StateMachine::setSpeakLanguage(std::string language, int _machineState) {
             }
         }
 
-        if(_machineState == 4)        {
+        if(_machineState == 4)        { // Combinancion de respuestas - estado 4
             switch (z) {
             case 1:
-                take2 = std::string("Por favor, sirvase."); //state 6
+                take2 = std::string("Por favor, sirvase."); //state 4
                 z = 2;
                 break;
             case 2:
-                take2 = std::string("Aqui tiene su boteya."); //state 6
+                take2 = std::string("Aqui tiene su boteya."); //state 4
                 z = 3;
                 break;
             case 3:
-                take2 = std::string("Espero que, este a su agrado."); //state 6
+                take2 = std::string("Espero que, este a su agrado."); //state 4
                 z = 1;
                 break;
             default:
