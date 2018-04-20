@@ -145,15 +145,15 @@ bool WtrArms::movingArmJoints(std::vector<double>& leftArmQ, std::vector<double>
 
 /************************************************************************/
 
-bool WtrArms::read(yarp::os::ConnectionReader& connection) // hay q arreglar
+bool WtrArms::read(yarp::os::ConnectionReader& connection)
 {
     yarp::os::Bottle in;
     in.read(connection);    // process data "in bottle in"
     bool ok = in.read(connection);
     if (!ok) return false;
-    printf("[WtrArms] Got %s\n", b.toString().c_str());
+    printf("[WtrArms] Got %s\n", in.toString().c_str());
 
-    state = b.get(0).asVocab();
+    state = in.get(0).asVocab();
 
     return true;
 }
@@ -230,12 +230,12 @@ void WtrArms::run()
                 {
                 std::vector<double> leftArmQ(7,0.0);
                 std::vector<double> rightArmQ(7,0.0);
-                leftArmQ[0] = -40;
-                leftArmQ[1] = -10;
-                leftArmQ[2] = 55;
-                leftArmQ[3] = -60;
-                leftArmQ[4] = -25;
-                leftArmQ[5] = 0;
+                leftArmQ[0] = -41.9859;
+                leftArmQ[1] = -12.8998;
+                leftArmQ[2] = 49.4727;
+                leftArmQ[3] = -56.6607;
+                leftArmQ[4] = -25.0263;
+                leftArmQ[5] = 0.0;
 
                 rightArmQ[0] = 53.60281;
                 rightArmQ[1] = -11.933228;
@@ -252,12 +252,12 @@ void WtrArms::run()
                 {
                 std::vector<double> leftArmQ(7,0.0);
                 std::vector<double> rightArmQ(7,0.0);
-                leftArmQ[0] = -40;
-                leftArmQ[1] = -10;
-                leftArmQ[2] = 55;
-                leftArmQ[3] = -60;
-                leftArmQ[4] = -25;
-                leftArmQ[5] = 0;
+                leftArmQ[0] = -41.9859;
+                leftArmQ[1] = -12.8998;
+                leftArmQ[2] = 49.4727;
+                leftArmQ[3] = -56.6607;
+                leftArmQ[4] = -25.0263;
+                leftArmQ[5] = 0.0;
 
                 rightArmQ[0] = 57.469242;
                 rightArmQ[1] = -12.108978;
@@ -274,12 +274,12 @@ void WtrArms::run()
                 {
                 std::vector<double> leftArmQ(7,0.0);
                 std::vector<double> rightArmQ(7,0.0);
-                leftArmQ[0] = -40;
-                leftArmQ[1] = -10;
-                leftArmQ[2] = 55;
-                leftArmQ[3] = -60;
-                leftArmQ[4] = -25;
-                leftArmQ[5] = 0;
+                leftArmQ[0] = -41.9859;
+                leftArmQ[1] = -12.8998;
+                leftArmQ[2] = 49.4727;
+                leftArmQ[3] = -56.6607;
+                leftArmQ[4] = -25.0263;
+                leftArmQ[5] = 0.0;
 
                 rightArmQ[0] = 57.820736;
                 rightArmQ[1] = -5.606323;
@@ -296,12 +296,12 @@ void WtrArms::run()
                 {
                 std::vector<double> leftArmQ(7,0.0);
                 std::vector<double> rightArmQ(7,0.0);
-                leftArmQ[0] = -40;
-                leftArmQ[1] = -10;
-                leftArmQ[2] = 55;
-                leftArmQ[3] = -60;
-                leftArmQ[4] = -25;
-                leftArmQ[5] = 0;
+                leftArmQ[0] = -41.9859;
+                leftArmQ[1] = -12.8998;
+                leftArmQ[2] = 49.4727;
+                leftArmQ[3] = -56.6607;
+                leftArmQ[4] = -25.0263;
+                leftArmQ[5] = 0.0;
 
                 rightArmQ[0] = 57.732864;
                 rightArmQ[1] = 0.790861;
@@ -318,12 +318,12 @@ void WtrArms::run()
                 {
                 std::vector<double> leftArmQ(7,0.0);
                 std::vector<double> rightArmQ(7,0.0);
-                leftArmQ[0] = -40;
-                leftArmQ[1] = -10;
-                leftArmQ[2] = 55;
-                leftArmQ[3] = -60;
-                leftArmQ[4] = -25;
-                leftArmQ[5] = 0;
+                leftArmQ[0] = -41.9859;
+                leftArmQ[1] = -12.8998;
+                leftArmQ[2] = 49.4727;
+                leftArmQ[3] = -56.6607;
+                leftArmQ[4] = -25.0263;
+                leftArmQ[5] = 0.0;
 
                 rightArmQ[0] = 58.17223;
                 rightArmQ[1] = 0.175747;
@@ -340,12 +340,12 @@ void WtrArms::run()
                 {
                 std::vector<double> leftArmQ(7,0.0);
                 std::vector<double> rightArmQ(7,0.0);
-                leftArmQ[0] = -40;
-                leftArmQ[1] = -10;
-                leftArmQ[2] = 55;
-                leftArmQ[3] = -60;
-                leftArmQ[4] = -25;
-                leftArmQ[5] = 0;
+                leftArmQ[0] = -41.9859;
+                leftArmQ[1] = -12.8998;
+                leftArmQ[2] = 49.4727;
+                leftArmQ[3] = -56.6607;
+                leftArmQ[4] = -25.0263;
+                leftArmQ[5] = 0.0;
 
                 rightArmQ[0] = 58.17223;
                 rightArmQ[1] = 0.175747;
