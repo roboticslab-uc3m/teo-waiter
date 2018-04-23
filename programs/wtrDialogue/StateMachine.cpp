@@ -38,8 +38,10 @@ void StateMachine::run() {
                 ttsSay( hello );  //-- Hi, I am teo, your waiter
                 yarp::os::Bottle cmd;
                 cmd.addVocab(VOCAB_HELLO_TEO);
+                printf("eeeeeeeeeeooooooooooo\n");
                 outCmdPortHead->write(cmd);
                 outCmdPortManip->write(cmd);
+                printf("se escribe en los puertos\n");
                 _machineState=1;
             } else if (_machineState==3) {
                 ttsSay( drink );  //-- Are you thirsty
@@ -106,12 +108,12 @@ void StateMachine::setInSrPort(yarp::os::BufferedPort<yarp::os::Bottle>* inSrPor
 }
 
 /************************************************************************/
-void StateMachine::setOutCmdPortHead(yarp::os::Port* outCmdPort) {
+void StateMachine::setOutCmdPortHead(yarp::os::RpcClient* outCmdPort) {
     this->outCmdPortHead = outCmdPort;
 }
 
 /************************************************************************/
-void StateMachine::setOutCmdPortManip(yarp::os::Port* outCmdPort) {
+void StateMachine::setOutCmdPortManip(yarp::os::RpcClient* outCmdPort) {
     this->outCmdPortManip = outCmdPort;
 }
 

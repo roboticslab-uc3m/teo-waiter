@@ -153,7 +153,21 @@ bool WtrArms::read(yarp::os::ConnectionReader& connection)
     if (!ok) return false;
     printf("[WtrArms] Got %s\n", in.toString().c_str());
 
-    state = in.get(0).asVocab();
+    if( (VOCAB_HELLO_TEO ==in.get(0).asVocab()) )
+    {
+        state = VOCAB_HELLO_TEO;
+    }
+    else if (VOCAB_GO_TEO == in.get(0).asVocab())
+        state = VOCAB_GO_TEO;
+
+    else if (VOCAB_WATER_PLEASE == in.get(0).asVocab())
+        state = VOCAB_WATER_PLEASE;
+
+    else if (VOCAB_SECOND_MOVEMENT == in.get(0).asVocab())
+        state = VOCAB_SECOND_MOVEMENT;
+
+    else if (VOCAB_STOP_TEO == in.get(0).asVocab())
+        state = VOCAB_STOP_TEO;
 
     return true;
 }

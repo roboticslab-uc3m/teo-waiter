@@ -35,8 +35,8 @@ class WtrDialogue : public yarp::os::RFModule {
     yarp::os::BufferedPort<yarp::os::Bottle> inSrPort;
     yarp::os::RpcClient outTtsPort; // Speak port
     yarp::os::RpcClient outRecognitionPort; // SpeechRecognition port
-    yarp::os::Port outCmdPortManip; // movement command port
-    yarp::os::Port outCmdPortHead; // movement command port
+    yarp::os::RpcClient outCmdPortManip; // movement command port
+    yarp::os::RpcClient outCmdPortHead; // movement command port
 
     bool interruptModule();
     double getPeriod();

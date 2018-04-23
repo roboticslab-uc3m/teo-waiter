@@ -34,14 +34,17 @@ namespace teo
 class StateMachine : public yarp::os::Thread {
 protected:
 
-    std::string _language;
-    int _machineState;
     yarp::os::ConstString _inStrState1;
 
     yarp::os::BufferedPort<yarp::os::Bottle> *inSrPort;
-    yarp::os::Port *outCmdPortHead;
-    yarp::os::Port *outCmdPortManip;
+
+    yarp::os::RpcClient *outCmdPortHead;
+    yarp::os::RpcClient *outCmdPortManip;
+
     yarp::os::RpcClient *outTtsPort;
+
+    int _machineState;
+    std::string _language;
 
     int z;
     int x;
@@ -88,10 +91,10 @@ public:
     void setInSrPort(yarp::os::BufferedPort<yarp::os::Bottle>* inSrPort);
 
     /** Register an output Port for commands for the head. */
-    void setOutCmdPortHead(yarp::os::Port* outCmdPort);
+    void setOutCmdPortHead(yarp::os::RpcClient* outCmdPort);
 
     /** Register an output Port for commands for the left arm. */
-    void setOutCmdPortManip(yarp::os::Port* outCmdPort);
+    void setOutCmdPortManip(yarp::os::RpcClient* outCmdPort);
 
     /** Register an output Port for tts. */
     void setOutTtsPort(yarp::os::RpcClient *outTtsPort);
