@@ -53,7 +53,7 @@ bool WtrDialogue::configure(yarp::os::ResourceFinder &rf) {
     }
     else if ( language == "spanish" )    {
         bOut.addString("mb-es1");
-        bRec.addString(language); // -- cambiar a "language" cuando tengamos reconocimiento en español
+        bRec.addString(language);
     }
     else    {
         printf("Language not found. Please use '--language english' or '--language spanish'");
