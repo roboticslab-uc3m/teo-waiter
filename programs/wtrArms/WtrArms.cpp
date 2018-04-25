@@ -153,23 +153,32 @@ bool WtrArms::read(yarp::os::ConnectionReader& connection)
     if (!ok) return false;
     printf("[WtrArms] Got %s\n", in.toString().c_str());
 
-    if( (VOCAB_HELLO_TEO ==in.get(0).asVocab()) )
-    {
-        state = VOCAB_HELLO_TEO;
+    switch ( in.get(0).asVocab() ) {
+        case VOCAB_HELLO_TEO:
+            printf("HELLO_TEO\n");
+            state = VOCAB_HELLO_TEO;
+            break;
+        case VOCAB_GO_TEO:
+            printf("GO_TEO\n");
+            state = VOCAB_GO_TEO;
+            break;
+        case VOCAB_WATER_PLEASE:
+            printf("WATER_PLEASE\n");
+            state = VOCAB_WATER_PLEASE;
+            break;
+        case VOCAB_SECOND_MOVEMENT:
+            printf("WATER_SECOND_MOVEMENT\n");
+            state = VOCAB_SECOND_MOVEMENT;
+            break;
+        case VOCAB_STOP_TEO:
+            printf("STOP_TEO\n");
+            state = VOCAB_STOP_TEO;
+            break;
+        default:
+            break;
+        return true;
     }
-    else if (VOCAB_GO_TEO == in.get(0).asVocab())
-        state = VOCAB_GO_TEO;
 
-    else if (VOCAB_WATER_PLEASE == in.get(0).asVocab())
-        state = VOCAB_WATER_PLEASE;
-
-    else if (VOCAB_SECOND_MOVEMENT == in.get(0).asVocab())
-        state = VOCAB_SECOND_MOVEMENT;
-
-    else if (VOCAB_STOP_TEO == in.get(0).asVocab())
-        state = VOCAB_STOP_TEO;
-
-    return true;
 }
 
 /************************************************************************/
