@@ -148,8 +148,7 @@ bool WtrArms::movingArmJoints(std::vector<double>& leftArmQ, std::vector<double>
 bool WtrArms::read(yarp::os::ConnectionReader& connection)
 {
     yarp::os::Bottle in;
-    in.read(connection);    // process data "in bottle in"
-    bool ok = in.read(connection);
+    bool ok = in.read(connection);    
     if (!ok) return false;
     printf("[WtrArms] Got %s\n", in.toString().c_str());
 
@@ -213,7 +212,7 @@ void WtrArms::run()
                     printf("begin MOVE TO Pa POSITION\n");
                     double Pa[7] = {-30, 40, 0, -70, -40, 10, 0};
                     leftArmIPositionControl2->positionMove(Pa);
-                    //yarp::os::Time::delay(4);
+                    yarp::os::Time::delay(4);
                     phase=1;
                 } // MOVIMIENTO NUMERO 1
 
@@ -221,7 +220,7 @@ void WtrArms::run()
                     printf("begin MOVE TO Pb POSITION\n");
                     double Pb[7] = {-20, 30, 0, -80, -30, 10, 0};
                     leftArmIPositionControl2->positionMove(Pb);
-                    //yarp::os::Time::delay(3);
+                    yarp::os::Time::delay(3);
                     phase=2;
                 } // MOVIMIENTO NUMERO 2
 
@@ -229,7 +228,7 @@ void WtrArms::run()
                     printf("begin MOVE TO Pc POSITION\n");
                     double Pc[7] = {-30, -10, 0, -70, 10, 10, 0};
                     leftArmIPositionControl2->positionMove(Pc);
-                    //yarp::os::Time::delay(4);
+                    yarp::os::Time::delay(4);
                     phase=0;
                 } // MOVIMIENTO NUMERO 3
 
