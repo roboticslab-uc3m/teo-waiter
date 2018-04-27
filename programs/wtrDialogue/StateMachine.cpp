@@ -38,12 +38,8 @@ void StateMachine::run() {
                 ttsSay( hello );  //-- Hi, I am teo, your waiter
                 yarp::os::Bottle cmd;
                 cmd.addVocab(VOCAB_HELLO_TEO);
-                printf("eeeeeeeeeeooooooooooo\n");
                 outCmdPortHead->write(cmd);
-                printf("la cabeza va bien\n");
-
                 outCmdPortManip->write(cmd);
-                printf("se escribe en los puertos\n");
                 _machineState=1;
             } else if (_machineState==3) {
                 ttsSay( drink );  //-- Are you thirsty
