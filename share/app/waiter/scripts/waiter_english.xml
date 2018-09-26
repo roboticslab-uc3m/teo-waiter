@@ -16,8 +16,8 @@
         <node>/manipulation</node>
     </module>
     <connection>
-        <from>/wtrDialogue/command:o</from>
-        <to>/wtrHead/dialogue/command:i</to>
+        <from>/wtrDialogue/moveHead/rpc:c</from>
+        <to>/wtrHead/dialogue/rpc:s</to>
     </connection>
     
 
@@ -26,8 +26,8 @@
         <node>/manipulation</node>
     </module>
     <connection>
-        <from>/wtrDialogue/command:o</from>
-        <to>/wtrArms/dialogue/command:i</to>
+        <from>/wtrDialogue/moveArms/rpc:c</from>
+        <to>/wtrArms/dialogue/rpc:s</to>
     </connection>
 
 

@@ -239,143 +239,93 @@ void WtrArms::run()
 
                 printf("giving water - 1st part\n");
 
-          /*// puntos de aproximacion
-            // Punto P5:  (66.080841 5.975395 -26.871704 35.413006 -70.808441 3.163445 0.0)
-            // Punto PF:  (58.17223 0.175747 -55.782074 71.616875 -38.82251 28.20738 0.0)
-            // Punto P4:  (57.732864 0.790861 -44.797882 71.968369 -38.91037 38.927944 0.0)
-            // PUNTO P3:  (57.820736 -5.606323 -44.797882 71.968369 -38.91037 45.782074 0.0)
-            // PUNTO P2:  (57.469242 -12.108978 -41.54657 71.968369 -38.99826 53.427063 0.0)
-            // PUNTO P1:  (53.60281 -11.933228 -16.063263 49.03339 -38.91037 25.219683 0.0)*/
 
-    // PUNTO P1  (53.60281 -11.933228 -16.063263 49.03339 -38.91037 25.219683 0.0)
+    // PUNTO P1  (63.0931434631348 -29.8594055175781 -55.1669616699219 83.3040390014648 54.2179260253906 0.0 1023.0)
 
                 {
                 std::vector<double> leftArmQ(7,0.0);
                 std::vector<double> rightArmQ(7,0.0);
-                leftArmQ[0] = -41.9859;
-                leftArmQ[1] = -12.8998;
-                leftArmQ[2] = 49.4727;
-                leftArmQ[3] = -56.6607;
-                leftArmQ[4] = -25.0263;
-                leftArmQ[5] = 0.0;
+                leftArmQ[0] = -42.0738220214844;
+                leftArmQ[1] = -15.5360412597656;
+                leftArmQ[2] = 39.0158157348633;
+                leftArmQ[3] = -55.8699645996094;
+                leftArmQ[4] = -17.9085998535156;
+                leftArmQ[5] = 6.85412979125977;
 
-                rightArmQ[0] = 53.60281;
-                rightArmQ[1] = -11.933228;
-                rightArmQ[2] = -16.063263;
-                rightArmQ[3] = 49.03339;
-                rightArmQ[4] = -38.91037;
-                rightArmQ[5] = 25.219683;
-                rightArmQ[6] = 1200;
+                rightArmQ[0] = 63.0931434631348;
+                rightArmQ[1] = -29.8594055175781;
+                rightArmQ[2] = -55.1669616699219;
+                rightArmQ[3] = 83.3040390014648;
+                rightArmQ[4] = 54.2179260253906;
+                rightArmQ[5] = 0.0;
+                rightArmQ[6] = 1023.0;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
-    // PUNTO P2  (57.469242 -12.108978 -41.54657 71.968369 -38.99826 53.427063 0.0)
+    // PUNTO P2  (63.1810188293457 -1.03689575195312 -55.0791015625 83.3040390014648 54.2179260253906 0.0 1023.0)
 
                 {
                 std::vector<double> leftArmQ(7,0.0);
                 std::vector<double> rightArmQ(7,0.0);
-                leftArmQ[0] = -41.9859;
-                leftArmQ[1] = -12.8998;
-                leftArmQ[2] = 49.4727;
-                leftArmQ[3] = -56.6607;
-                leftArmQ[4] = -25.0263;
-                leftArmQ[5] = 0.0;
+                leftArmQ[0] = -42.0738220214844;
+                leftArmQ[1] = -15.5360412597656;
+                leftArmQ[2] = 39.0158157348633;
+                leftArmQ[3] = -55.8699645996094;
+                leftArmQ[4] = -17.9085998535156;
+                leftArmQ[5] = 6.85412979125977;
 
-                rightArmQ[0] = 57.469242;
-                rightArmQ[1] = -12.108978;
-                rightArmQ[2] = -41.54657;
-                rightArmQ[3] = 71.968369;
-                rightArmQ[4] = -38.99826;
-                rightArmQ[5] = 53.427063;
-                rightArmQ[6] = 1200;
+                rightArmQ[0] = 63.1810188293457;
+                rightArmQ[1] = -1.03689575195312;
+                rightArmQ[2] = -55.0791015625;
+                rightArmQ[3] = 83.3040390014648 ;
+                rightArmQ[4] = 54.2179260253906;
+                rightArmQ[5] = 0.0;
+                rightArmQ[6] = 1023.0;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
-    // PUNTO P3  (57.820736 -5.606323 -44.797882 71.968369 -38.91037 45.782074 0.0)
+    // PUNTO P3  (63.0931434631348 -1.03689575195312 -55.0791015625 83.3040390014648 54.2179260253906 -24.8506164550781 1023.0)
 
                 {
                 std::vector<double> leftArmQ(7,0.0);
                 std::vector<double> rightArmQ(7,0.0);
-                leftArmQ[0] = -41.9859;
-                leftArmQ[1] = -12.8998;
-                leftArmQ[2] = 49.4727;
-                leftArmQ[3] = -56.6607;
-                leftArmQ[4] = -25.0263;
-                leftArmQ[5] = 0.0;
+                leftArmQ[0] = -42.0738220214844;
+                leftArmQ[1] = -15.5360412597656;
+                leftArmQ[2] = 39.0158157348633;
+                leftArmQ[3] = -55.8699645996094;
+                leftArmQ[4] = -17.9085998535156;
+                leftArmQ[5] = 6.85412979125977;
 
-                rightArmQ[0] = 57.820736;
-                rightArmQ[1] = -5.606323;
-                rightArmQ[2] = -44.797882;
-                rightArmQ[3] = 71.968369;
-                rightArmQ[4] = -38.91037;
-                rightArmQ[5] = 45.782074;
-                rightArmQ[6] = 1200;
+                rightArmQ[0] = 63.0931434631348;
+                rightArmQ[1] = -1.03689575195312;
+                rightArmQ[2] = -55.0791015625 ;
+                rightArmQ[3] = 83.3040390014648 ;
+                rightArmQ[4] = 54.2179260253906 ;
+                rightArmQ[5] = -24.00 ;
+                rightArmQ[6] = 1023.0;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
-    // Punto P4:  (57.732864 0.790861 -44.797882 71.968369 -38.91037 38.927944 0.0)
-
-                {
-                std::vector<double> leftArmQ(7,0.0);
-                std::vector<double> rightArmQ(7,0.0);
-                leftArmQ[0] = -41.9859;
-                leftArmQ[1] = -12.8998;
-                leftArmQ[2] = 49.4727;
-                leftArmQ[3] = -56.6607;
-                leftArmQ[4] = -25.0263;
-                leftArmQ[5] = 0.0;
-
-                rightArmQ[0] = 57.732864;
-                rightArmQ[1] = 0.790861;
-                rightArmQ[2] = -44.797882;
-                rightArmQ[3] = 71.968369;
-                rightArmQ[4] = -38.91037;
-                rightArmQ[5] = 38.927944;
-                rightArmQ[6] = 1200;
-                movingArmJoints(leftArmQ,rightArmQ);
-                }
-
-    // Punto PF:  (58.17223 0.175747 -55.782074 71.616875 -38.82251 28.20738 0.0)
-
-                {
-                std::vector<double> leftArmQ(7,0.0);
-                std::vector<double> rightArmQ(7,0.0);
-                leftArmQ[0] = -41.9859;
-                leftArmQ[1] = -12.8998;
-                leftArmQ[2] = 49.4727;
-                leftArmQ[3] = -56.6607;
-                leftArmQ[4] = -25.0263;
-                leftArmQ[5] = 0.0;
-
-                rightArmQ[0] = 58.17223;
-                rightArmQ[1] = 0.175747;
-                rightArmQ[2] = -55.782074;
-                rightArmQ[3] = 71.616875;
-                rightArmQ[4] = -38.82251;
-                rightArmQ[5] = 28.20738;
-                rightArmQ[6] = 1200;
-                movingArmJoints(leftArmQ,rightArmQ);
-                }
 
     // Close right hand
 
                 {
                 std::vector<double> leftArmQ(7,0.0);
                 std::vector<double> rightArmQ(7,0.0);
-                leftArmQ[0] = -41.9859;
-                leftArmQ[1] = -12.8998;
-                leftArmQ[2] = 49.4727;
-                leftArmQ[3] = -56.6607;
-                leftArmQ[4] = -25.0263;
-                leftArmQ[5] = 0.0;
+                leftArmQ[0] = -42.0738220214844;
+                leftArmQ[1] = -15.5360412597656;
+                leftArmQ[2] = 39.0158157348633;
+                leftArmQ[3] = -55.8699645996094;
+                leftArmQ[4] = -17.9085998535156;
+                leftArmQ[5] = 6.85412979125977;
 
-                rightArmQ[0] = 58.17223;
-                rightArmQ[1] = 0.175747;
-                rightArmQ[2] = -55.782074;
-                rightArmQ[3] = 71.616875;
-                rightArmQ[4] = -38.82251;
-                rightArmQ[5] = 28.20738;
-                rightArmQ[6] = -1200;
+                rightArmQ[0] = 63.0931434631348;
+                rightArmQ[1] = -1.03689575195312;
+                rightArmQ[2] = -55.0791015625 ;
+                rightArmQ[3] = 83.3040390014648 ;
+                rightArmQ[4] = 54.2179260253906 ;
+                rightArmQ[5] = -24.00 ;
+                rightArmQ[6] = -1023.0;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
@@ -387,7 +337,7 @@ void WtrArms::run()
 
                 printf("giving water - 2nd part\n");
 
-    // Punto P5:  (66.080841 5.975395 -26.871704 35.413006 -70.808441 3.163445 0.0)
+    // Punto P5:  (59.1388397216797 -17.3813781738281 -21.6871643066406 63.444637298584 24.8681888580322 -20.9841918945312 -1023.0)
 
                 {
                 std::vector<double> leftArmQ(7,0.0);
@@ -399,13 +349,13 @@ void WtrArms::run()
                 leftArmQ[4] = 10;
                 leftArmQ[5] = -10;
 
-                rightArmQ[0] = 66.080841;
-                rightArmQ[1] = 5.975395;
-                rightArmQ[2] = -26.871704;
-                rightArmQ[3] = 35.413006;
-                rightArmQ[4] = -70.808441;
-                rightArmQ[5] = 3.163445;
-                rightArmQ[6] = -1200;
+                rightArmQ[0] = 59.1388397216797;
+                rightArmQ[1] = -17.3813781738281;
+                rightArmQ[2] = -21.6871643066406;
+                rightArmQ[3] = 63.444637298584;
+                rightArmQ[4] = 24.8681888580322;
+                rightArmQ[5] = -20.9841918945312;
+                rightArmQ[6] = -1023.0;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
@@ -423,13 +373,13 @@ void WtrArms::run()
                 leftArmQ[4] = 10;
                 leftArmQ[5] = -10;
 
-                rightArmQ[0] = 66.080841;
-                rightArmQ[1] = 5.975395;
-                rightArmQ[2] = -26.871704;
-                rightArmQ[3] = 35.413006;
-                rightArmQ[4] = -70.808441;
-                rightArmQ[5] = 3.163445;
-                rightArmQ[6] = 1200;
+                rightArmQ[0] = 59.1388397216797;
+                rightArmQ[1] = -17.3813781738281;
+                rightArmQ[2] = -21.6871643066406;
+                rightArmQ[3] = 63.444637298584;
+                rightArmQ[4] = 24.8681888580322;
+                rightArmQ[5] = -20.9841918945312;
+                rightArmQ[6] = 1023.0;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
