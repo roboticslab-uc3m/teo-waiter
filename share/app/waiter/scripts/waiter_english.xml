@@ -62,6 +62,13 @@
         <from>/wtrDialogue/tts/rpc:c</from>
         <to>/tts/rpc:s</to>
     </connection>
+    
+    
+    <module>
+        <name>gnome-terminal</name>
+        <parameters>-x sh -c "echo 'Instructions (write them in quotation marks): \n - hi teo\n - thank you\n - give me water\n - stop teo\n' ; yarp write /write /wtrDialogue/speRecog/speech:i"</parameters>
+        <node>localhost</node>
+    </module>
 
 </application>
 

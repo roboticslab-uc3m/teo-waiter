@@ -63,6 +63,16 @@
         <from>/wtrDialogue/tts/rpc:c</from>
         <to>/tts/rpc:s</to>
     </connection>
+    
+    
+    <module>
+        <name>gnome-terminal</name>
+        <parameters>-x sh -c "echo 'Instrucciones (escribirlas entrecomilladas): \n - hola teo\n - gracias\n - dame agua\n - para por favor\n' ; yarp write /write /wtrDialogue/speRecog/speech:i"</parameters>
+        <node>localhost</node>
+    </module>
+    
+
+    
 
 </application>
 
