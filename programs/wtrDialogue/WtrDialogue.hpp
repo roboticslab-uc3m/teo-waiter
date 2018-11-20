@@ -9,6 +9,7 @@
 #include "StateMachine.hpp"
 
 #define DEFAULT_LANGUAGE "english"
+#define DEFAULT_MODE "micro" // modes: microphone & keyboard
 
 //instrucciones para el followme
 #define VOCAB_FOLLOW_ME VOCAB4('f','o','l','l')

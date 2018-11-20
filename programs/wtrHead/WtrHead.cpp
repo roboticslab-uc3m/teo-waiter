@@ -10,6 +10,8 @@ namespace teo
 
 bool WtrHead::configure(ResourceFinder &rf) {
 
+    std::string robot = rf.check("robot",yarp::os::Value(DEFAULT_ROBOT),"name of /robot to be used").asString();
+
     //ConstString fileName(DEFAULT_FILE_NAME);
     
     printf("--------------------------------------------------------------\n");
@@ -30,7 +32,7 @@ bool WtrHead::configure(ResourceFinder &rf) {
     Property headOptions;
     headOptions.put("device","remote_controlboard");
     headOptions.put("local","/waiterHead/head");
-    headOptions.put("remote","/teo/head");
+    headOptions.put("remote",robot+"/head");
     headDevice.open(headOptions);
 
     if (!headDevice.view(headIControlMode2) ) { // connecting our device with "control mode 2" interface, initializing which control mode we want (position)
