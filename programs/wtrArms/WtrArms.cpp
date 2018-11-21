@@ -236,25 +236,25 @@ void WtrArms::run()
                 printf("stability\n");
                 if (phase==0 && state) {
                     printf("begin MOVE TO Pa POSITION\n");
-                    double Pa[7] = {-30, 40, 0, -70, -40, 10, 0};
+                    double Pa[7] = {-30, 40, 0, -70, -34, 10, 0};
                     leftArmIPositionControl2->positionMove(Pa);
-                    yarp::os::Time::delay(4);
+                    yarp::os::Time::delay(3); // 4
                     phase=1;
                 } // MOVIMIENTO NUMERO 1
 
                 if (phase==1 && state) {
                     printf("begin MOVE TO Pb POSITION\n");
-                    double Pb[7] = {-20, 30, 0, -80, -30, 10, 0};
+                    double Pb[7] = {-20, 30, 0, -80, -28, 10, 0};
                     leftArmIPositionControl2->positionMove(Pb);
-                    yarp::os::Time::delay(3);
+                    yarp::os::Time::delay(2); // 3
                     phase=2;
                 } // MOVIMIENTO NUMERO 2
 
                 if (phase==2 && state) {
                     printf("begin MOVE TO Pc POSITION\n");
-                    double Pc[7] = {-30, -10, 0, -70, 10, 10, 0};
+                    double Pc[7] = {-30, -10, 0, -70, 9, 10, 0};
                     leftArmIPositionControl2->positionMove(Pc);
-                    yarp::os::Time::delay(4);
+                    yarp::os::Time::delay(3); //4
                     phase=0;
                 } // MOVIMIENTO NUMERO 3
 
@@ -275,7 +275,7 @@ void WtrArms::run()
                 leftArmQ[2] = 0.0;
                 leftArmQ[3] = -70;
                 leftArmQ[4] = 10;
-                leftArmQ[5] = 0;
+                leftArmQ[5] = 9;
 
                 rightArmQ[0] = 63.0931434631348;
                 rightArmQ[1] = -29.8594055175781;
