@@ -53,8 +53,26 @@ bool WtrHead::configure(ResourceFinder &rf) {
         return false;
     }
 
+    // -- Configuring Speeds and Accelerations
+
+    // -- Head
+    std::vector<double> headSpeed(2,25.0); // 7,30.0
+    std::vector<double> headAcceleration(2,25.0); // 7,30.0
+
+    // -- configuring..
+
+    if(!headIPositionControl2->setRefSpeeds(headSpeed.data())){
+        printf("[Error] Problems setting reference speed on head joints.\n");
+        return false;
+    }
+
+    if(!headIPositionControl2->setRefAccelerations(headAcceleration.data())){
+        printf("[Error] Problems setting reference acceleration on head joints.\n");
+        return false;
+    }
+
+
     inCvPort.setIPositionControl(headIPositionControl2);
-    //iPositionControl->setPositionMode();
 
     //-----------------OPEN LOCAL PORTS------------//
     inDiaPortProcessor.setInCvPortPtr(&inCvPort);
