@@ -32,25 +32,31 @@
 
 
     <module>
-        <name>colorRegionDetection</name>
-        <parameters>--kinectDevice OpenNI2DeviceServer --kinectLocal /cvBottle --algorithm redMinusGreen --maxNumBlobs 1 --outFeatures "(pxXpos pxYpos mmZ)" --outFeaturesFormat 1 --outImage 0 --seeBounding 1</parameters>
-	<parameters></parameters>
+        <name>colorRegionDetection2D</name>
+        <parameters>--algorithm redMinusGreen --maxNumBlobs 1 --outFeaturesFormat 1 --outImage 0 --seeBounding 1</parameters>
         <node>/head</node>
     </module>
+    
     <connection>
-        <from>/cvBottle/state:o</from>
+        <from>/OpenNI2/imageFrame:o</from>
+        <to>/colorRegionDetection2D/img:i</to>
+    </connection>
+    
+    <connection>
+        <from>/colorRegionDetection2D/features:o</from>
         <to>/wtrHead/cvBottle/state:i</to>
     </connection>
 
 
     <module>
         <name>yarpview</name>
-        <parameters>--name /yarpview/cvBottle/img:i</parameters>
+        <parameters>--name /yarpview/img:i</parameters>
         <node>localhost</node>
     </module>
+    
     <connection>
-        <from>/cvBottle/img:o</from>
-        <to>/yarpview/cvBottle/img:i</to>
+        <from>/colorRegionDetection2D/img:o</from>
+        <to>/yarpview/img:i</to>
     </connection>
 
 
