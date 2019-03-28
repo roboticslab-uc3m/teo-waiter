@@ -10,6 +10,8 @@ namespace teo
 
 bool WtrHead::configure(ResourceFinder &rf) {
 
+    std::string robot = rf.check("robot",yarp::os::Value(DEFAULT_ROBOT),"name of /robot to be used").asString();
+
     //ConstString fileName(DEFAULT_FILE_NAME);
     
     printf("--------------------------------------------------------------\n");
@@ -30,7 +32,7 @@ bool WtrHead::configure(ResourceFinder &rf) {
     Property headOptions;
     headOptions.put("device","remote_controlboard");
     headOptions.put("local","/waiterHead/head");
-    headOptions.put("remote","/teo/head");
+    headOptions.put("remote",robot+"/head");
     headDevice.open(headOptions);
 
     if (!headDevice.view(headIControlMode2) ) { // connecting our device with "control mode 2" interface, initializing which control mode we want (position)
@@ -51,8 +53,26 @@ bool WtrHead::configure(ResourceFinder &rf) {
         return false;
     }
 
+    // -- Configuring Speeds and Accelerations
+
+    // -- Head
+    std::vector<double> headSpeed(2,25.0); // 7,30.0
+    std::vector<double> headAcceleration(2,25.0); // 7,30.0
+
+    // -- configuring..
+
+    if(!headIPositionControl2->setRefSpeeds(headSpeed.data())){
+        printf("[Error] Problems setting reference speed on head joints.\n");
+        return false;
+    }
+
+    if(!headIPositionControl2->setRefAccelerations(headAcceleration.data())){
+        printf("[Error] Problems setting reference acceleration on head joints.\n");
+        return false;
+    }
+
+
     inCvPort.setIPositionControl(headIPositionControl2);
-    //iPositionControl->setPositionMode();
 
     //-----------------OPEN LOCAL PORTS------------//
     inDiaPortProcessor.setInCvPortPtr(&inCvPort);

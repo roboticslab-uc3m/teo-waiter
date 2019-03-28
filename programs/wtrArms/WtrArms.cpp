@@ -83,6 +83,32 @@ bool WtrArms::configure(yarp::os::ResourceFinder &rf)
         return false;
     }
 
+    // -- Configuring Speeds and Accelerations
+
+    // -- Arms
+    std::vector<double> armSpeeds(6,25.0); // 7,30.0
+    std::vector<double> armAccelerations(6,25.0); // 7,30.0
+
+    // -- configuring..
+
+    if(!rightArmIPositionControl2->setRefSpeeds(armSpeeds.data())){
+        printf("[Error] Problems setting reference speed on right-arm joints.\n");
+        return false;
+    }
+    if(!leftArmIPositionControl2->setRefSpeeds(armSpeeds.data())){
+        printf("[Error] Problems setting reference speed on left-arm joints.\n");
+        return false;
+    }
+
+    if(!rightArmIPositionControl2->setRefAccelerations(armAccelerations.data())){
+        printf("[Error] Problems setting reference acceleration on right-arm joints.\n");
+        return false;
+    }
+    if(!leftArmIPositionControl2->setRefAccelerations(armAccelerations.data())){
+        printf("[Error] Problems setting reference acceleration on left-arm joints.\n");
+        return false;
+    }
+
     phase = 0;
 
     inDialogPort.open("/wtrArms/dialogue/rpc:s");
@@ -210,25 +236,25 @@ void WtrArms::run()
                 printf("stability\n");
                 if (phase==0 && state) {
                     printf("begin MOVE TO Pa POSITION\n");
-                    double Pa[7] = {-30, 40, 0, -70, -40, 10, 0};
+                    double Pa[7] = {-30, 40, 0, -70, -34, 10, 0};
                     leftArmIPositionControl2->positionMove(Pa);
-                    yarp::os::Time::delay(4);
+                    yarp::os::Time::delay(3); // 4
                     phase=1;
                 } // MOVIMIENTO NUMERO 1
 
                 if (phase==1 && state) {
                     printf("begin MOVE TO Pb POSITION\n");
-                    double Pb[7] = {-20, 30, 0, -80, -30, 10, 0};
+                    double Pb[7] = {-20, 30, 0, -80, -28, 10, 0};
                     leftArmIPositionControl2->positionMove(Pb);
-                    yarp::os::Time::delay(3);
+                    yarp::os::Time::delay(2); // 3
                     phase=2;
                 } // MOVIMIENTO NUMERO 2
 
                 if (phase==2 && state) {
                     printf("begin MOVE TO Pc POSITION\n");
-                    double Pc[7] = {-30, -10, 0, -70, 10, 10, 0};
+                    double Pc[7] = {-30, -10, 0, -70, 9, 10, 0};
                     leftArmIPositionControl2->positionMove(Pc);
-                    yarp::os::Time::delay(4);
+                    yarp::os::Time::delay(3); //4
                     phase=0;
                 } // MOVIMIENTO NUMERO 3
 
@@ -238,6 +264,28 @@ void WtrArms::run()
             case VOCAB_WATER_PLEASE: {//VOCAB_WATER_PLEASE
 
                 printf("giving water - 1st part\n");
+
+    //Preparing position:
+
+                {
+                std::vector<double> leftArmQ(7,0.0);
+                std::vector<double> rightArmQ(7,0.0);
+                leftArmQ[0] = -30;
+                leftArmQ[1] = -10;
+                leftArmQ[2] = 0.0;
+                leftArmQ[3] = -70;
+                leftArmQ[4] = 10;
+                leftArmQ[5] = 9;
+
+                rightArmQ[0] = 63.0931434631348;
+                rightArmQ[1] = -29.8594055175781;
+                rightArmQ[2] = -55.1669616699219;
+                rightArmQ[3] = 83.3040390014648;
+                rightArmQ[4] = 54.2179260253906;
+                rightArmQ[5] = 0.0;
+                rightArmQ[6] = 1023.0;
+                movingArmJoints(leftArmQ,rightArmQ);
+                }
 
 
     // PUNTO P1  (63.0931434631348 -29.8594055175781 -55.1669616699219 83.3040390014648 54.2179260253906 0.0 1023.0)
@@ -306,8 +354,10 @@ void WtrArms::run()
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
+                 yarp::os::Time::delay(1);
 
     // Close right hand
+
 
                 {
                 std::vector<double> leftArmQ(7,0.0);
@@ -325,7 +375,7 @@ void WtrArms::run()
                 rightArmQ[3] = 83.3040390014648 ;
                 rightArmQ[4] = 54.2179260253906 ;
                 rightArmQ[5] = -24.00 ;
-                rightArmQ[6] = -1023.0;
+                rightArmQ[6] = -1600.0;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
@@ -345,7 +395,7 @@ void WtrArms::run()
                 leftArmQ[0] = -20;
                 leftArmQ[1] = -10;
                 leftArmQ[2] = 0;
-                leftArmQ[3] = -60;
+                leftArmQ[3] = -50; // -60
                 leftArmQ[4] = 10;
                 leftArmQ[5] = -10;
 
@@ -355,13 +405,14 @@ void WtrArms::run()
                 rightArmQ[3] = 63.444637298584;
                 rightArmQ[4] = 24.8681888580322;
                 rightArmQ[5] = -20.9841918945312;
-                rightArmQ[6] = -1023.0;
+                rightArmQ[6] = -1600.0;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 
-                yarp::os::Time::delay(2);
+                yarp::os::Time::delay(1);
 
     // Open right hand
+
 
                 {
                 std::vector<double> leftArmQ(7,0.0);
@@ -379,9 +430,11 @@ void WtrArms::run()
                 rightArmQ[3] = 63.444637298584;
                 rightArmQ[4] = 24.8681888580322;
                 rightArmQ[5] = -20.9841918945312;
-                rightArmQ[6] = 1023.0;
+                rightArmQ[6] = 1600.0;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
+
+                yarp::os::Time::delay(1);
 
     // Relax right hand
 
@@ -395,13 +448,13 @@ void WtrArms::run()
                 leftArmQ[4] = 10;
                 leftArmQ[5] = -10;
 
-                rightArmQ[0] = 66.080841;
-                rightArmQ[1] = 5.975395;
-                rightArmQ[2] = -26.871704;
-                rightArmQ[3] = 35.413006;
-                rightArmQ[4] = -70.808441;
-                rightArmQ[5] = 3.163445;
-                rightArmQ[6] = 1200;
+                rightArmQ[0] = 0.0;
+                rightArmQ[1] = 0.0;
+                rightArmQ[2] = 0.0;
+                rightArmQ[3] = 0.0;
+                rightArmQ[4] = 0.0;
+                rightArmQ[5] = 0.0;
+                rightArmQ[6] = -1600.0;
                 movingArmJoints(leftArmQ,rightArmQ);
                 }
 

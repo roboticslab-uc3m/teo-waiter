@@ -8,7 +8,7 @@ namespace teo
 /************************************************************************/
 bool WtrDialogue::configure(yarp::os::ResourceFinder &rf) {
 
-    std::string language = rf.check("language",yarp::os::Value(DEFAULT_LANGUAGE),"language to be used").asString();
+    std::string language = rf.check("language",yarp::os::Value(DEFAULT_LANGUAGE),"language to be used").asString();    
 
     printf("--------------------------------------------------------------\n");
     if (rf.check("help")) {
