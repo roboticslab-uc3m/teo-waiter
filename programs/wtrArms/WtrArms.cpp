@@ -401,7 +401,7 @@ void WtrArms::run()
 
                 rightArmQ[0] = -59.1388397216797;
                 rightArmQ[1] = 17.3813781738281;
-                rightArmQ[2] = -21.6871643066406;
+                rightArmQ[2] = 21.6871643066406;
                 rightArmQ[3] = -63.444637298584;
                 rightArmQ[4] = -24.8681888580322;
                 rightArmQ[5] = 20.9841918945312;
