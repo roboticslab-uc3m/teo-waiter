@@ -43,7 +43,7 @@ private:
     yarp::dev::PolyDriver leftArmDevice;
     /** Left Arm ControlMode2 Interface */
     yarp::dev::IControlMode2 *leftArmIControlMode2;
-   /** Left Arm PositionControl2 Interface */
+    /** Left Arm PositionControl2 Interface */
     yarp::dev::IPositionControl2 *leftArmIPositionControl2;
 
     /** Right Arm Device */
@@ -53,11 +53,16 @@ private:
     /** Right Arm PositionControl2 Interface */
      yarp::dev::IPositionControl2 *rightArmIPositionControl2;
 
+     /** Right Hand */
+     yarp::dev::PolyDriver rightHandDevice;
+     /** Right Arm PWMControl Interface */
+     yarp::dev::IPWMControl *rightHandIPWMControl;
+
      /** Phase of arm stability movement */
      int phase;
 
      /** Arm Joints Move And Wait */
-     bool movingArmJoints (std::vector<double>& leftArmQ, std::vector<double>& rightArmQ);
+     bool movingArmJoints (std::vector<double>& leftArmQ, std::vector<double>& rightArmQ, double rightHandPwm = 0.0);
 
      /** State */
      int state;

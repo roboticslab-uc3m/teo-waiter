@@ -42,7 +42,7 @@ bool WtrArms::configure(yarp::os::ResourceFinder &rf)
     if (!leftArmDevice.view(leftArmIPositionControl2) ) { // connecting our device with "position control 2" interface (configuring our device: speed, acceleration... and sending joint positions)
         printf("[warning] Problems acquiring leftArmIControlMode2 interface\n");
         return false;
-    } else printf("[success] Acquired leftArmIControlMode2 interface\n");
+    } else printf("[success] Acquired leftArmIControlMode2 interface\n");    
 
     // ------ RIGHT ARM -------
     yarp::os::Property rightArmOptions;
@@ -65,6 +65,24 @@ bool WtrArms::configure(yarp::os::ResourceFinder &rf)
         printf("[warning] Problems acquiring rightArmIControlMode2 interface\n");
         return false;
     } else printf("[success] Acquired rightArmIControlMode2 interface\n");
+
+    // ------ RIGHT HAND -------
+    yarp::os::Property rightHandOptions;
+    rightHandOptions.put("device","remote_controlboard");
+    rightHandOptions.put("remote",robot+"/rightHand");
+    rightHandOptions.put("local",WtrArmsStr+robot+"/rightHand");
+    rightHandDevice.open(rightHandOptions);
+    if(!rightHandDevice.isValid()) {
+      printf("robot rightHand device not available.\n");
+      rightHandDevice.close();
+      yarp::os::Network::fini();
+      return false;
+    }
+
+    if (!rightHandDevice.view(rightHandIPWMControl) ) {
+        printf("[warning] Problems acquiring rightHandIPWMControl interface\n");
+        return false;
+    } else printf("[success] Acquired rightHandIPWMControl interface\n");
 
     //------ Set control modes -------- //
     int leftArmAxes;
@@ -145,10 +163,11 @@ bool WtrArms::updateModule()
 
 /************************************************************************/
 
-bool WtrArms::movingArmJoints(std::vector<double>& leftArmQ, std::vector<double> &rightArmQ)
+bool WtrArms::movingArmJoints(std::vector<double>& leftArmQ, std::vector<double> &rightArmQ, double rightHandPwm)
 {
     rightArmIPositionControl2->positionMove( rightArmQ.data() );
     leftArmIPositionControl2->positionMove( leftArmQ.data() );
+    rightHandIPWMControl->setRefDutyCycle(0, rightHandPwm);
 
     //printf("Waiting for right arm.");
     bool doneR = false; // checking the position move
@@ -236,7 +255,7 @@ void WtrArms::run()
                 printf("stability\n");
                 if (phase==0 && state) {
                     printf("begin MOVE TO Pa POSITION\n");
-                    double Pa[7] = {-30, 40, 0, -70, -34, 10, 0};
+                    double Pa[7] = {-30, 40, 0, -70, -34, 10};
                     leftArmIPositionControl2->positionMove(Pa);
                     yarp::os::Time::delay(3); // 4
                     phase=1;
@@ -244,7 +263,7 @@ void WtrArms::run()
 
                 if (phase==1 && state) {
                     printf("begin MOVE TO Pb POSITION\n");
-                    double Pb[7] = {-20, 30, 0, -80, -28, 10, 0};
+                    double Pb[7] = {-20, 30, 0, -80, -28, 10};
                     leftArmIPositionControl2->positionMove(Pb);
                     yarp::os::Time::delay(2); // 3
                     phase=2;
@@ -252,7 +271,7 @@ void WtrArms::run()
 
                 if (phase==2 && state) {
                     printf("begin MOVE TO Pc POSITION\n");
-                    double Pc[7] = {-30, -10, 0, -70, 9, 10, 0};
+                    double Pc[7] = {-30, -10, 0, -70, 9, 10};
                     leftArmIPositionControl2->positionMove(Pc);
                     yarp::os::Time::delay(3); //4
                     phase=0;
@@ -283,8 +302,8 @@ void WtrArms::run()
                 rightArmQ[3] = 83.3040390014648;
                 rightArmQ[4] = 54.2179260253906;
                 rightArmQ[5] = 0.0;
-                rightArmQ[6] = 1023.0;
-                movingArmJoints(leftArmQ,rightArmQ);
+
+                movingArmJoints(leftArmQ,rightArmQ, 100.0);
                 }
 
 
@@ -306,8 +325,8 @@ void WtrArms::run()
                 rightArmQ[3] = 83.3040390014648;
                 rightArmQ[4] = 54.2179260253906;
                 rightArmQ[5] = 0.0;
-                rightArmQ[6] = 1023.0;
-                movingArmJoints(leftArmQ,rightArmQ);
+
+                movingArmJoints(leftArmQ,rightArmQ, 100.0);
                 }
 
     // PUNTO P2  (63.1810188293457 -1.03689575195312 -55.0791015625 83.3040390014648 54.2179260253906 0.0 1023.0)
@@ -328,8 +347,8 @@ void WtrArms::run()
                 rightArmQ[3] = 83.3040390014648 ;
                 rightArmQ[4] = 54.2179260253906;
                 rightArmQ[5] = 0.0;
-                rightArmQ[6] = 1023.0;
-                movingArmJoints(leftArmQ,rightArmQ);
+
+                movingArmJoints(leftArmQ,rightArmQ, 100.0);
                 }
 
     // PUNTO P3  (63.0931434631348 -1.03689575195312 -55.0791015625 83.3040390014648 54.2179260253906 -24.8506164550781 1023.0)
@@ -350,8 +369,8 @@ void WtrArms::run()
                 rightArmQ[3] = 83.3040390014648 ;
                 rightArmQ[4] = 54.2179260253906 ;
                 rightArmQ[5] = -24.00 ;
-                rightArmQ[6] = 1023.0;
-                movingArmJoints(leftArmQ,rightArmQ);
+
+                movingArmJoints(leftArmQ,rightArmQ,100.0);
                 }
 
                  yarp::os::Time::delay(1);
@@ -375,8 +394,8 @@ void WtrArms::run()
                 rightArmQ[3] = 83.3040390014648 ;
                 rightArmQ[4] = 54.2179260253906 ;
                 rightArmQ[5] = -24.00 ;
-                rightArmQ[6] = -1600.0;
-                movingArmJoints(leftArmQ,rightArmQ);
+
+                movingArmJoints(leftArmQ,rightArmQ,-100.0);
                 }
 
                 yarp::os::Time::delay(1);
@@ -405,8 +424,8 @@ void WtrArms::run()
                 rightArmQ[3] = 63.444637298584;
                 rightArmQ[4] = 24.8681888580322;
                 rightArmQ[5] = -20.9841918945312;
-                rightArmQ[6] = -1600.0;
-                movingArmJoints(leftArmQ,rightArmQ);
+
+                movingArmJoints(leftArmQ,rightArmQ,-100.0);
                 }
 
                 yarp::os::Time::delay(1);
@@ -430,8 +449,8 @@ void WtrArms::run()
                 rightArmQ[3] = 63.444637298584;
                 rightArmQ[4] = 24.8681888580322;
                 rightArmQ[5] = -20.9841918945312;
-                rightArmQ[6] = 1600.0;
-                movingArmJoints(leftArmQ,rightArmQ);
+
+                movingArmJoints(leftArmQ,rightArmQ,100.0);
                 }
 
                 yarp::os::Time::delay(1);
@@ -454,8 +473,8 @@ void WtrArms::run()
                 rightArmQ[3] = 0.0;
                 rightArmQ[4] = 0.0;
                 rightArmQ[5] = 0.0;
-                rightArmQ[6] = -1600.0;
-                movingArmJoints(leftArmQ,rightArmQ);
+
+                movingArmJoints(leftArmQ,rightArmQ,-100.0);
                 }
 
                 yarp::os::Time::delay(1);

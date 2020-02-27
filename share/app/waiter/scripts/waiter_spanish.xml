@@ -38,7 +38,7 @@
     </module>
     
     <connection>
-        <from>/OpenNI2/imageFrame:o</from>
+        <from>/xtion/rgbImage:o</from>
         <to>/colorRegionDetection2D/img:i</to>
     </connection>
     
