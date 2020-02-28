@@ -13,7 +13,7 @@
 
     <module>
         <name>wtrHead</name>
-        <node>/manipulation</node>
+        <node>localhost</node>
     </module>
     <connection>
         <from>/wtrDialogue/moveHead/rpc:c</from>
@@ -23,7 +23,7 @@
 
     <module>
         <name>wtrArms</name>
-        <node>/manipulation</node>
+        <node>localhost</node>
     </module>
     <connection>
         <from>/wtrDialogue/moveArms/rpc:c</from>

@@ -35,20 +35,20 @@ bool WtrHead::configure(ResourceFinder &rf) {
     headOptions.put("remote",robot+"/head");
     headDevice.open(headOptions);
 
-    if (!headDevice.view(headIControlMode2) ) { // connecting our device with "control mode 2" interface, initializing which control mode we want (position)
-        printf("[warning] Problems acquiring headIControlMode2 interface\n");
+    if (!headDevice.view(headIControlMode) ) { // connecting our device with "control mode 2" interface, initializing which control mode we want (position)
+        printf("[warning] Problems acquiring headIControlMode interface\n");
         return false;
-    } else printf("[success] Acquired headIControlMode2 interface\n");
-    if (!headDevice.view(headIPositionControl2) ) { // connecting our device with "position control 2" interface (configuring our device: speed, acceleration... and sending joint positions)
-        printf("[warning] Problems acquiring headIPositionControl2 interface\n");
+    } else printf("[success] Acquired headIControlMode interface\n");
+    if (!headDevice.view(headIPositionControl) ) { // connecting our device with "position control 2" interface (configuring our device: speed, acceleration... and sending joint positions)
+        printf("[warning] Problems acquiring headIPositionControl interface\n");
         return false;
-    } else printf("[success] Acquired headIPositionControl2 interface\n");
+    } else printf("[success] Acquired headIPositionControl interface\n");
 
     //-- Set control modes
     int headAxes;
-    headIPositionControl2->getAxes(&headAxes);
+    headIPositionControl->getAxes(&headAxes);
     std::vector<int> headControlModes(headAxes,VOCAB_CM_POSITION);
-    if(! headIControlMode2->setControlModes( headControlModes.data() )){
+    if(! headIControlMode->setControlModes( headControlModes.data() )){
         printf("[warning] Problems setting position control mode of: head\n");
         return false;
     }
@@ -61,18 +61,18 @@ bool WtrHead::configure(ResourceFinder &rf) {
 
     // -- configuring..
 
-    if(!headIPositionControl2->setRefSpeeds(headSpeed.data())){
+    if(!headIPositionControl->setRefSpeeds(headSpeed.data())){
         printf("[Error] Problems setting reference speed on head joints.\n");
         return false;
     }
 
-    if(!headIPositionControl2->setRefAccelerations(headAcceleration.data())){
+    if(!headIPositionControl->setRefAccelerations(headAcceleration.data())){
         printf("[Error] Problems setting reference acceleration on head joints.\n");
         return false;
     }
 
 
-    inCvPort.setIPositionControl(headIPositionControl2);
+    inCvPort.setIPositionControl(headIPositionControl);
 
     //-----------------OPEN LOCAL PORTS------------//
     inDiaPortProcessor.setInCvPortPtr(&inCvPort);

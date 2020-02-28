@@ -35,14 +35,14 @@ bool WtrArms::configure(yarp::os::ResourceFinder &rf)
       return false;
     }
 
-    if (!leftArmDevice.view(leftArmIControlMode2) ) { // connecting our device with "control mode 2" interface, initializing which control mode we want (position)
+    if (!leftArmDevice.view(leftArmIControlMode) ) { // connecting our device with "control mode 2" interface, initializing which control mode we want (position)
         printf("[warning] Problems acquiring leftArmPos interface\n");
         return false;
     } else printf("[success] Acquired leftArmPos interface\n");
-    if (!leftArmDevice.view(leftArmIPositionControl2) ) { // connecting our device with "position control 2" interface (configuring our device: speed, acceleration... and sending joint positions)
-        printf("[warning] Problems acquiring leftArmIControlMode2 interface\n");
+    if (!leftArmDevice.view(leftArmIPositionControl) ) { // connecting our device with "position control 2" interface (configuring our device: speed, acceleration... and sending joint positions)
+        printf("[warning] Problems acquiring leftArmIControlMode interface\n");
         return false;
-    } else printf("[success] Acquired leftArmIControlMode2 interface\n");    
+    } else printf("[success] Acquired leftArmIControlMode interface\n");    
 
     // ------ RIGHT ARM -------
     yarp::os::Property rightArmOptions;
@@ -57,14 +57,14 @@ bool WtrArms::configure(yarp::os::ResourceFinder &rf)
       return false;
     }
 
-    if (!rightArmDevice.view(rightArmIControlMode2) ) { // connecting our device with "control mode 2" interface, initializing which control mode we want (position)
+    if (!rightArmDevice.view(rightArmIControlMode) ) { // connecting our device with "control mode 2" interface, initializing which control mode we want (position)
         printf("[warning] Problems acquiring rightArmPos interface\n");
         return false;
     } else printf("[success] Acquired rightArmPos interface\n");
-    if (!rightArmDevice.view(rightArmIPositionControl2) ) { // connecting our device with "position control 2" interface (configuring our device: speed, acceleration... and sending joint positions)
-        printf("[warning] Problems acquiring rightArmIControlMode2 interface\n");
+    if (!rightArmDevice.view(rightArmIPositionControl) ) { // connecting our device with "position control 2" interface (configuring our device: speed, acceleration... and sending joint positions)
+        printf("[warning] Problems acquiring rightArmIControlMode interface\n");
         return false;
-    } else printf("[success] Acquired rightArmIControlMode2 interface\n");
+    } else printf("[success] Acquired rightArmIControlMode interface\n");
 
     // ------ RIGHT HAND -------
     yarp::os::Property rightHandOptions;
@@ -86,17 +86,17 @@ bool WtrArms::configure(yarp::os::ResourceFinder &rf)
 
     //------ Set control modes -------- //
     int leftArmAxes;
-    leftArmIPositionControl2->getAxes(&leftArmAxes);
+    leftArmIPositionControl->getAxes(&leftArmAxes);
     std::vector<int> leftArmControlModes(leftArmAxes,VOCAB_CM_POSITION);
-    if(! leftArmIControlMode2->setControlModes( leftArmControlModes.data() )){
+    if(! leftArmIControlMode->setControlModes( leftArmControlModes.data() )){
         printf("[warning] Problems setting position control mode of: left-arm\n");
         return false;
     }
 
     int rightArmAxes;
-    rightArmIPositionControl2->getAxes(&rightArmAxes);
+    rightArmIPositionControl->getAxes(&rightArmAxes);
     std::vector<int> rightArmControlModes(rightArmAxes,VOCAB_CM_POSITION);
-    if(! rightArmIControlMode2->setControlModes(rightArmControlModes.data())){
+    if(! rightArmIControlMode->setControlModes(rightArmControlModes.data())){
         printf("[warning] Problems setting position control mode of: right-arm\n");
         return false;
     }
@@ -109,20 +109,20 @@ bool WtrArms::configure(yarp::os::ResourceFinder &rf)
 
     // -- configuring..
 
-    if(!rightArmIPositionControl2->setRefSpeeds(armSpeeds.data())){
+    if(!rightArmIPositionControl->setRefSpeeds(armSpeeds.data())){
         printf("[Error] Problems setting reference speed on right-arm joints.\n");
         return false;
     }
-    if(!leftArmIPositionControl2->setRefSpeeds(armSpeeds.data())){
+    if(!leftArmIPositionControl->setRefSpeeds(armSpeeds.data())){
         printf("[Error] Problems setting reference speed on left-arm joints.\n");
         return false;
     }
 
-    if(!rightArmIPositionControl2->setRefAccelerations(armAccelerations.data())){
+    if(!rightArmIPositionControl->setRefAccelerations(armAccelerations.data())){
         printf("[Error] Problems setting reference acceleration on right-arm joints.\n");
         return false;
     }
-    if(!leftArmIPositionControl2->setRefAccelerations(armAccelerations.data())){
+    if(!leftArmIPositionControl->setRefAccelerations(armAccelerations.data())){
         printf("[Error] Problems setting reference acceleration on left-arm joints.\n");
         return false;
     }
@@ -165,15 +165,15 @@ bool WtrArms::updateModule()
 
 bool WtrArms::movingArmJoints(std::vector<double>& leftArmQ, std::vector<double> &rightArmQ, double rightHandPwm)
 {
-    rightArmIPositionControl2->positionMove( rightArmQ.data() );
-    leftArmIPositionControl2->positionMove( leftArmQ.data() );
+    rightArmIPositionControl->positionMove( rightArmQ.data() );
+    leftArmIPositionControl->positionMove( leftArmQ.data() );
     rightHandIPWMControl->setRefDutyCycle(0, rightHandPwm);
 
     //printf("Waiting for right arm.");
     bool doneR = false; // checking the position move
     while((!doneR)&&(!Thread::isStopping()))
     {
-        rightArmIPositionControl2->checkMotionDone(&doneR);
+        rightArmIPositionControl->checkMotionDone(&doneR);
         yarp::os::Time::delay(0.1);
     }
 
@@ -181,7 +181,7 @@ bool WtrArms::movingArmJoints(std::vector<double>& leftArmQ, std::vector<double>
     bool doneL = false;
     while((!doneL)&&(!Thread::isStopping()))
     {
-        leftArmIPositionControl2->checkMotionDone(&doneL);
+        leftArmIPositionControl->checkMotionDone(&doneL);
         yarp::os::Time::delay(0.1);
     }
 
@@ -256,7 +256,7 @@ void WtrArms::run()
                 if (phase==0 && state) {
                     printf("begin MOVE TO Pa POSITION\n");
                     double Pa[] = {-30, 40, 0, -70, 34, 10};
-                    leftArmIPositionControl2->positionMove(Pa);
+                    leftArmIPositionControl->positionMove(Pa);
                     yarp::os::Time::delay(3); // 4
                     phase=1;
                 } // MOVIMIENTO NUMERO 1
@@ -264,7 +264,7 @@ void WtrArms::run()
                 if (phase==1 && state) {
                     printf("begin MOVE TO Pb POSITION\n");
                     double Pb[] = {-20, 30, 0, -80, 28, 10};
-                    leftArmIPositionControl2->positionMove(Pb);
+                    leftArmIPositionControl->positionMove(Pb);
                     yarp::os::Time::delay(2); // 3
                     phase=2;
                 } // MOVIMIENTO NUMERO 2
@@ -272,7 +272,7 @@ void WtrArms::run()
                 if (phase==2 && state) {
                     printf("begin MOVE TO Pc POSITION\n");
                     double Pc[] = {-30, -10, 0, -70, -9, 10};
-                    leftArmIPositionControl2->positionMove(Pc);
+                    leftArmIPositionControl->positionMove(Pc);
                     yarp::os::Time::delay(3); //4
                     phase=0;
                 } // MOVIMIENTO NUMERO 3
@@ -487,8 +487,8 @@ void WtrArms::run()
 
                 printf("homing\n");
 
-                std::vector<double> leftArmQ(7,0.0);
-                std::vector<double> rightArmQ(7,0.0);
+                std::vector<double> leftArmQ(6,0.0);
+                std::vector<double> rightArmQ(6,0.0);
                 movingArmJoints(leftArmQ,rightArmQ);
 
                 break;

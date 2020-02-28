@@ -33,28 +33,29 @@ namespace teo
 class InCvPort : public BufferedPort<Bottle> {
     public:
 
-        InCvPort(): follow(false) {}
+        InCvPort(): follow(false), lastTimestamp(0.0) {}
 
-        void setIPositionControl(yarp::dev::IPositionControl2 *iPositionControl) {
-            this->headIPositionControl2 = iPositionControl;
+        void setIPositionControl(yarp::dev::IPositionControl *iPositionControl) {
+            this->headIPositionControl = iPositionControl;
         }
 
-        void setIVelocityControl(yarp::dev::IVelocityControl2 *iVelocityControl) {
-            this->headIVelocityControl2 = iVelocityControl;
+        void setIVelocityControl(yarp::dev::IVelocityControl *iVelocityControl) {
+            this->headIVelocityControl = iVelocityControl;
         }
 
         void setFollow(bool value);
 
 protected:
         bool follow;
+        double lastTimestamp;
 
         /** Callback on incoming Bottle. **/
         virtual void onRead(Bottle& b);
 
         /** Head PositionControl2 Interface */
-        yarp::dev::IPositionControl2 *headIPositionControl2;
+        yarp::dev::IPositionControl *headIPositionControl;
         /** Head VelocityControl2 Interface */
-        yarp::dev::IVelocityControl2 *headIVelocityControl2;
+        yarp::dev::IVelocityControl *headIVelocityControl;
 
 };
 

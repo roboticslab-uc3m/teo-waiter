@@ -56,9 +56,9 @@ class WtrHead : public RFModule {
         /** Head Device */
         yarp::dev::PolyDriver headDevice;
         /** Head ControlMode2 Interface */
-        yarp::dev::IControlMode2 *headIControlMode2;
+        yarp::dev::IControlMode *headIControlMode;
         /** Head PositionControl2 Interface */
-        yarp::dev::IPositionControl2 *headIPositionControl2;
+        yarp::dev::IPositionControl *headIPositionControl;
 
 };
 

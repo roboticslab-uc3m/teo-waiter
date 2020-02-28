@@ -9,11 +9,20 @@ namespace teo
 
 void InCvPort::onRead(Bottle& b) {
 
+    double now = yarp::os::Time::now();
+
+    if (lastTimestamp != 0.0 && now - lastTimestamp < 0.1)
+    {
+        return;
+    }
+
+    lastTimestamp = now;
+
     //-------------------POSITION CONTROL MODE FOR HEAD--------------------
 
     if ( ! follow ){
-    headIPositionControl2->positionMove(0, 0.0);
-    headIPositionControl2->positionMove(1, 0.0);
+    headIPositionControl->positionMove(0, 0.0);
+    headIPositionControl->positionMove(1, 0.0);
     return;
     }
     if (b.size() < 4) return;
@@ -24,11 +33,12 @@ void InCvPort::onRead(Bottle& b) {
 
     printf("%f %f\n",x,y);
 
-    if( x > 320 ) headIPositionControl2->relativeMove(0, -1);
-    if( x < 300 ) headIPositionControl2->relativeMove(0, 1);
-    //
-    if( y > 290 ) headIPositionControl2->relativeMove(1, 1);
-    if( y < 270 ) headIPositionControl2->relativeMove(1, -1);
+    if( x > 320 ) headIPositionControl->relativeMove(0, -1);
+    if( x < 300 ) headIPositionControl->relativeMove(0, 1);
+
+    if( y > 290 ) headIPositionControl->relativeMove(1, 1);
+    if( y < 270 ) headIPositionControl->relativeMove(1, -1);
+
 
     /*//------VELOCITY CONTROL MODE FOR HEAD------// no borrar
     if ( ! follow ){
